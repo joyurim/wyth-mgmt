@@ -99,6 +99,27 @@ export default {
             },
           ],
         },
+        {
+          menuId: 'menu5',
+          menuTitle: '예제',
+          subMenuList: [
+            {
+              menuId: 'menu5-1',
+              menuName: 'date-picker',
+              menuUrl: '/example/date-picker',
+            },
+            {
+              menuId: 'menu5-2',
+              menuName: 'element-ui',
+              menuUrl: '/example/element-ui',
+            },
+            {
+              menuId: 'menu5-3',
+              menuName: 'vue-select',
+              menuUrl: '/example/vue-select',
+            },
+          ],
+        },
       ],
     }
   },
