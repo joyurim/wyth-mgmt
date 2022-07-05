@@ -38,6 +38,30 @@
       font-weight: 500;
     }
   }
+  .breadcrumb {
+    min-height: 40px;
+    li {
+      height: 28px;
+      line-height: 28px;
+      font-size: 11px;
+      &::after {
+        content: '>';
+        padding: 0 4px;
+      }
+      > a {
+        display: inline-block;
+        &:hover {
+          color: $primary-1;
+          border-bottom: 1px solid $primary-1;
+        }
+      }
+      &:last-child {
+        &::after {
+          content: none;
+        }
+      }
+    }
+  }
 }
 // 버튼 기본 스타일
 %btn {
@@ -612,7 +636,7 @@ p.form__error {
 }
 /* ============= Search-form Style ============= */
 .search-form {
-  @apply flex flex-wrap items-end flex-1;
+  @apply flex flex-wrap  flex-1;
   margin-bottom: 30px;
   &__label {
     margin-right: 5px;
