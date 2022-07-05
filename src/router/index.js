@@ -73,6 +73,21 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "mgmt" */ '@/views/mgmt/code'),
       },
+      {
+        path: '/example/date-picker',
+        name: 'DatePicker',
+        component: () => import('@/views/example/date-picker')
+      },
+      {
+        path: '/example/element-ui',
+        name: 'ElementUi',
+        component: () => import('@/views/example/element-ui')
+      },
+      {
+        path: '/example/vue-select',
+        name: 'VueSelect',
+        component: () => import('@/views/example/vue-select')
+      }
     ],
   },
 ]
