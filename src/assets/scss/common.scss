@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('/font/NotoSansCJKkr-Regular.otf') format('opentype'),
+    url('/font/NotoSansCJKkr-Regular.woff') format('woff'),
+    url('/font/NotoSansCJKkr-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('/font/NotoSansCJKkr-Medium.otf') format('opentype'),
+    url('/font/NotoSansCJKkr-Medium.woff') format('woff'),
+    url('/font/NotoSansCJKkr-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('/font/NotoSansCJKkr-Bold.otf') format('opentype'),
+    url('/font/NotoSansCJKkr-Bold.woff') format('woff'),
+    url('/font/NotoSansCJKkr-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  line-height: 1.5;
+  color: #333;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+
+  // 스크롤 스타일
+  scrollbar-width: auto;
+  scrollbar-color: #a3a7b9 transparent;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 7px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 20px;
+    border: 2px solid transparent;
+  }
+}

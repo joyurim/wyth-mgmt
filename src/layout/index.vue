@@ -1,24 +1,17 @@
 <template>
-  <div class="FrameworkWrap">
-    <div class="flex-1 flex flex-col">
-      <Header class="flex-none" />
-      <div class="content">
-        <div class="content__wrap">
-          <router-view />
-        </div>
-      </div>
-    </div>
+  <div class="flex flex-start h-sereen">
+    <sidebar />
+    <section class="">
+      <router-view />
+    </section>
   </div>
 </template>
 
 <script>
-import Header from './Header'
-
+import sidebar from '../components/layout/sidebar'
 export default {
   name: 'LayoutIndex',
-  components: {
-    Header,
-  },
+  components: { sidebar },
   data() {
     return {}
   },
