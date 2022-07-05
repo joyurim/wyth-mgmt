@@ -4,6 +4,7 @@ import router from './router'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import './tailwind.css'
+import '@/assets/scss/_common.scss'
 
 Vue.config.productionTip = false
 Vue.component('v-select', vSelect)
