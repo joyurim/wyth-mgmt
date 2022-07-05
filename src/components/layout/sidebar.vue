@@ -25,7 +25,7 @@
         </ul>
       </li>
     </ul>
-    <p class="cursor-pointer"><i class="triangle" />Logout</p>
+    <p class="logout"><i class="triangle" />Logout</p>
   </nav>
 </template>
 
@@ -110,7 +110,7 @@ export default {
   width: 220px;
   height: 100vh;
   padding: 33px 20px 40px;
-  background: #ffedf3;
+  background: $primary-3;
   color: $white;
   &__wrap {
     overflow-y: auto;
@@ -124,30 +124,34 @@ export default {
       .menu {
         display: block;
         padding-left: 8px;
-        border-left: 1px solid #f1c2d0;
+        border-left: 1px solid $primary-4;
       }
       &:hover {
         .menu {
-          border-left-color: #f297b3;
-          color: #f297b3;
+          border-left-color: $primary-2;
+          color: $primary-2;
         }
       }
       .router-link-exact-active {
-        color: #f5799f;
+        color: $primary-1;
         font-weight: 500;
       }
     }
   }
-  .triangle {
-    display: inline-block;
-    width: 0px;
-    height: 0px;
-    margin-right: 5px;
-    border-top: 6px solid #666666;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    transform: rotate(270deg);
-    vertical-align: middle;
+  .logout {
+    color: $primary-2;
+    cursor: pointer;
+    .triangle {
+      display: inline-block;
+      width: 0px;
+      height: 0px;
+      margin-right: 2px;
+      border-top: 6px solid $primary-2;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      transform: rotate(270deg);
+      vertical-align: middle;
+    }
   }
 }
 </style>
