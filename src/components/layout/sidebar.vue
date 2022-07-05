@@ -108,8 +108,8 @@ export default {
 <style lang="scss" scoped>
 .sidebar {
   width: 220px;
-  height: 100vh;
-  padding: 33px 20px 40px;
+  height: 100%;
+  padding: 30px 20px 40px;
   background: $primary-3;
   color: $white;
   &__wrap {
