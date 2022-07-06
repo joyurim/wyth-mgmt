@@ -1,16 +1,89 @@
 <template>
   <section aria-label="콘서트 관리 조회 화면">
     <article aria-label="검색 영역" class="search-form">
-      <div class="flex-1">
+      <!-- 공연,아티스트 선택 -->
+      <div class="w-28 mr-1">
+        <v-select
+          v-model="search.searchType"
+          :options="search.searchTypeList"
+          label="name"
+          :searchable="false"
+        />
+      </div>
+      <!-- 콘서트명 -->
+      <div class="w-64 mr-1">
+        <v-select
+          v-model="search.concertNm"
+          :options="search.concertNmList"
+          label="name"
+          :searchable="false"
+        />
+      </div>
+      <!-- 회차 -->
+      <!-- TODO : 회차는 콘서트 명에서 특정 콘서트를 선택했을 경우에만 노출됩니다. -->
+      <div class="w-16">
+        <v-select
+          v-model="search.round"
+          :options="search.roundList"
+          label="name"
+          :searchable="false"
+        />
+      </div>
+      <!-- 상태 -->
+      <div class="flex items-center ml-7 mr-4">
+        <label class="search-form__label">상태</label>
         <div class="w-24">
           <v-select
-            v-model="selectbox1"
-            :options="options"
+            v-model="search.status"
+            :options="search.statusList"
             label="name"
             :searchable="false"
           />
         </div>
       </div>
+      <!-- 노출여부 -->
+      <div class="flex items-center mr-4">
+        <label class="search-form__label">노출여부</label>
+        <div class="w-24">
+          <v-select
+            v-model="search.exposureYn"
+            :options="search.exposureYnList"
+            label="name"
+            :searchable="false"
+          />
+        </div>
+      </div>
+      <!-- 기간검색 -->
+      <!-- TODO : select에서 기간검색(직접입력) 선택 시 데이터피커 활성화) -->
+      <div class="flex items-center">
+        <label class="search-form__label">기간검색</label>
+        <div class="w-28 mr-1">
+          <v-select
+            v-model="search.date"
+            :options="search.dateList"
+            label="name"
+            :searchable="false"
+          />
+        </div>
+        <date-picker
+          v-model="search.startDate"
+          value-type="format"
+          :lang="search.lang"
+          :clearable="false"
+          :disabled-date="disabledStartRange"
+          disabled
+        />
+        <span class="mx-2">-</span>
+        <date-picker
+          v-model="search.endDate"
+          :lang="search.lang"
+          value-type="format"
+          :clearable="false"
+          :disabled-date="disabledEndRange"
+          disabled
+        />
+      </div>
+      <button class="btn__search" @click="inquiry">검색</button>
     </article>
     <article aria-label="콘서트 리스트" class="grid">
       <!-- 리스트 카운트 -->
@@ -21,7 +94,9 @@
         </div>
         <!-- 버튼영역 -->
         <div class="btn-group">
-          <button class="btn__primary" @click="addConcert">콘서트 추가</button>
+          <button class="btn__primary-line" @click="addConcert">
+            콘서트 추가
+          </button>
         </div>
       </div>
       <!-- 리스트 -->
@@ -64,8 +139,8 @@
                 :key="`concert-mgmt-list-${c.id}`"
               >
                 <td>{{ c.id }}</td>
-                <td>{{ c.concretNm }}</td>
-                <td>{{ c.artist }}</td>
+                <td class="truncate">{{ c.concretNm }}</td>
+                <td class="truncate">{{ c.artist }}</td>
                 <td>{{ c.startDate }}</td>
                 <td>{{ c.endDate }}</td>
                 <td>{{ c.round }}</td>
@@ -89,7 +164,7 @@
           </tbody>
         </table>
       </div>
-      <pagination
+      <GridPagination
         v-if="grid.page.totalCount > 0"
         :total-count="grid.page.totalCount"
         :current-page="grid.page.currentPage"
@@ -100,32 +175,143 @@
   </section>
 </template>
 <script>
-import pagination from '@/components/common/Pagination'
+import GridPagination from '@/components/common/GridPagination'
+import datePicker from 'vue2-datepicker'
 
 export default {
   name: 'ConcertMgmt',
   components: {
-    pagination,
+    GridPagination,
+    datePicker,
   },
   data() {
     return {
-      options: [
-        {
-          name: '사과',
-          code: 'apple',
+      search: {
+        // 공연,아티스트 선택
+        searchType: '전체',
+        searchTypeList: [
+          {
+            name: '전체',
+            code: 'searchTypeAll',
+          },
+          {
+            name: '공연명',
+            code: 'concretNm',
+          },
+          {
+            name: '아티스트',
+            code: 'artist',
+          },
+        ],
+        // 콘서트명 선택
+        concertNm: '콘서트1',
+        concertNmList: [
+          {
+            name: '콘서트1',
+            code: 'concert1',
+          },
+          {
+            name: '콘서트 2(회차노출)',
+            code: 'concert2',
+          },
+          {
+            name: '콘서트 3',
+            code: 'concert3',
+          },
+        ],
+        // 회차
+        round: '1',
+        roundList: [
+          {
+            name: '5',
+            code: 'round5',
+          },
+          {
+            name: '4',
+            code: 'round4',
+          },
+          {
+            name: '3',
+            code: 'round3',
+          },
+          {
+            name: '2',
+            code: 'round2',
+          },
+          {
+            name: '1',
+            code: 'round1',
+          },
+        ],
+        // 상태
+        status: '전체',
+        statusList: [
+          {
+            name: '전체',
+            code: 'statusAll',
+          },
+          {
+            name: '예정',
+            code: 'schedule',
+          },
+          {
+            name: '진행중',
+            code: 'ongoing',
+          },
+          {
+            name: '종료',
+            code: 'end',
+          },
+        ],
+        // 노출여부
+        exposureYn: '전체',
+        exposureYnList: [
+          {
+            name: '전체',
+            code: 'exposureYnAll',
+          },
+          {
+            name: '노출',
+            code: 'exposure',
+          },
+          {
+            name: '비노출',
+            code: 'unexposed',
+          },
+        ],
+        // 검색기간
+        date: '전체',
+        dateList: [
+          {
+            name: '전체',
+            code: 'dateAll',
+          },
+          {
+            name: '1개월',
+            code: '1month',
+          },
+          {
+            name: '3개월',
+            code: '3month',
+          },
+          {
+            name: '6개월',
+            code: '6month',
+          },
+          {
+            name: '기간검색',
+            code: 'directInput',
+          },
+        ],
+        startDate: '',
+        endDate: '',
+        lang: {
+          days: ['일', '월', '화', '수', '목', '금', '토'],
+          yearFormat: 'YYYY년',
+          formatLocale: {
+            firstDayOfWeek: 0,
+          },
         },
-        {
-          name: '레몬',
-          code: 'lemon',
-        },
-        {
-          name: '키위',
-          code: 'kiwi',
-        },
-      ],
-      selectbox1: {
-        name: '',
-        code: '',
       },
       grid: {
         concertList: [
@@ -143,111 +329,111 @@ export default {
           },
           {
             id: '19',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: '동방신기 새앨범 판매콘서트',
+            artist: '동방신기',
+            startDate: '2021-02-14',
+            endDate: '2021-02.16',
+            round: '6',
+            concertHall: '올림픽 체조경기장',
+            status: '예정',
+            exposureYn: '비노출',
+            rgstrDate: '2021-02-01 15:01:47',
           },
           {
             id: '18',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: 'Red Velvet SPECIAL LIVE [2022 The ReVe Festival]',
+            artist: '레드벨벳',
+            startDate: '2021-02-01',
+            endDate: '2021-02-02',
+            round: '3',
+            concertHall: '올림픽공원 올림픽홀',
+            status: '예정',
+            exposureYn: '노출',
+            rgstrDate: '2021-02-01 15:01:47',
           },
           {
             id: '17',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: 'EXO PLANET#5 - EXplOration',
+            artist: 'EXO',
+            startDate: '2021-01-31',
+            endDate: '2021-02-01',
+            round: '4',
+            concertHall: '고척 스카이돔',
+            status: '진행중',
+            exposureYn: '노출',
+            rgstrDate: '2021-01-01 15:01:47',
           },
           {
             id: '16',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: 'BoA THE LIVE 2018 in SEOUL',
+            artist: 'BoA',
+            startDate: '2021-01-01',
+            endDate: '2021-01-01',
+            round: '1',
+            concertHall: '세종문화회관',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2021-01-01 15:01:47',
           },
           {
             id: '15',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: 'TAEYEON SPECIAL LIVE ',
+            artist: '태연',
+            startDate: '2020-12-22',
+            endDate: '2020-12-24',
+            round: '3',
+            concertHall: '경희대학교 평화의전당',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2020-12-01 15:01:47',
           },
           {
             id: '14',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: '[THE AGIT] Love, Still – Seohyun',
+            artist: '서현',
+            startDate: '2020-04-08',
+            endDate: '2020-04-09',
+            round: '2',
+            concertHall: '코엑스 아티움 SMTOWN',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2020-04-01 15:01:47',
           },
           {
             id: '13',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: 'SHINee SPECIAL PARTY - THE SHINING',
+            artist: '샤이니',
+            startDate: '2020-03-01',
+            endDate: '2020-03-02',
+            round: '2',
+            concertHall: 'KSPO DOME (올림픽체조경기장)',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2021-02-20 15:01:47',
           },
           {
             id: '12',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: 'TAEYEON Concert - The UNSEEN',
+            artist: '태연',
+            startDate: '2020.01.17',
+            endDate: '2020.01.19',
+            round: '4',
+            concertHall: '올림픽공원 SK올림픽핸드볼경기장',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2020-01-01 15:01:47',
           },
           {
             id: '11',
-            concretNm: '',
-            artist: '',
-            startDate: '',
-            endDate: '',
-            round: '',
-            concertHall: '',
-            status: '',
-            exposureYn: '',
-            rgstrDate: '',
+            concretNm: '2019 CHANGWON K-POP WORLD FESTIVAL',
+            artist: '레드벨벳',
+            startDate: '2019.10.11',
+            endDate: '2019.10.11',
+            round: '1',
+            concertHall: '창원스포츠파크주경기장',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2021-01-01 15:01:47',
           },
         ],
         page: {
@@ -259,6 +445,15 @@ export default {
     }
   },
   methods: {
+    // datepicker
+    // 시작일 선택값 변경
+    disabledStartRange(date) {
+      return date < new Date()
+    },
+    // 종료일 선택값 변경
+    disabledEndRange(date) {
+      return date < new Date()
+    },
     inquiry() {
       // 조회
     },

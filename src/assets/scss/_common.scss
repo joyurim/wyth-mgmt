@@ -30,12 +30,23 @@
 .layout {
   height: 100%;
   padding: 30px;
-  .user {
-    padding-bottom: 4px;
+  &__top {
+    @apply flex items-center justify-between;
+    margin-bottom: 10px;
     border-bottom: 1px solid $gray-20;
     text-align: right;
     .point-color {
       font-weight: 500;
+    }
+    .btn__logout {
+      width: 16px;
+      height: 16px;
+      background: url(@/assets/img/icon__logout.png) no-repeat center center /
+        100%;
+      vertical-align: sub;
+      &:focus {
+        outline: transparent;
+      }
     }
   }
   .breadcrumb {
@@ -43,13 +54,20 @@
     li {
       height: 28px;
       line-height: 28px;
-      font-size: 11px;
       &::after {
-        content: '>';
-        padding: 0 4px;
+        content: '';
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin: 0 4px;
+        background: url(@/assets/img/icon__arrow-up.png) no-repeat center center /
+          100%;
+        transform: rotate(90deg);
       }
       > a {
         display: inline-block;
+        color: $gray-50;
+        font-size: 11px;
         &:hover {
           color: $primary-1;
           border-bottom: 1px solid $primary-1;
@@ -589,14 +607,16 @@ p.form__error {
   }
   // 드롭다운
   .vs__dropdown-menu {
-    padding: 0;
+    overflow-y: auto;
     min-width: 100%; // *필수 select의 너비 값만큼 dropdown의 너비값 조절
+    max-height: 130px;
+    padding: 0;
     box-shadow: none;
     border-radius: 0;
     border-color: $gray-60;
 
     .vs__dropdown-option {
-      padding: 9px 11px;
+      padding: 2px 5px;
       background: $white;
       color: $gray-70;
       &:hover,
@@ -716,6 +736,7 @@ p.form__error {
         box-sizing: border-box;
         text-align: center;
         word-break: break-all;
+        font-weight: 500;
         &:first-child {
           border-left: none;
         }
@@ -782,10 +803,25 @@ p.form__error {
 }
 /* ============= Search-form Style ============= */
 .search-form {
-  @apply flex flex-wrap  flex-1;
-  margin-bottom: 30px;
+  @apply flex flex-wrap items-center;
+  margin-bottom: 10px;
+  > div,
+  button {
+    margin-bottom: 8px;
+  }
+  .mx-datepicker {
+    width: 120px;
+    .mx-input-wrapper {
+      width: 100%;
+      .mx-input {
+        height: 30px;
+        border-radius: 0;
+      }
+    }
+  }
+
   &__label {
-    margin-right: 5px;
+    margin-right: 8px;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: -0.3px;

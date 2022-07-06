@@ -2,12 +2,17 @@
   <div class="flex flex-start h-screen">
     <sidebar class="flex-none" />
     <section class="flex-1 flex flex-col layout">
-      <p class="user"><span class="point-color">홍길동</span>님 안녕하세요.</p>
-      <ul class="flex items-center breadcrumb">
-        <li><router-link to="/">홈</router-link></li>
-        <li><router-link to="/">콘서트</router-link></li>
-        <li><router-link to="/">리스트</router-link></li>
-      </ul>
+      <div class="layout__top">
+        <ul class="flex items-center breadcrumb">
+          <li><router-link to="/">홈</router-link></li>
+          <li><router-link to="/">콘서트</router-link></li>
+          <li><router-link to="/">리스트</router-link></li>
+        </ul>
+        <div>
+          <span class="point-color">홍길동</span>님 안녕하세요.
+          <button type="button" class="btn__logout"></button>
+        </div>
+      </div>
       <router-view class="h-full" />
     </section>
   </div>

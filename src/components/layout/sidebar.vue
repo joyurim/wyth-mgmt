@@ -164,14 +164,15 @@ export default {
     cursor: pointer;
     .triangle {
       display: inline-block;
-      width: 0px;
-      height: 0px;
-      margin-right: 2px;
-      border-top: 6px solid $primary-2;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      transform: rotate(270deg);
-      vertical-align: middle;
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+      background: url(@/assets/img/icon__logout.png) no-repeat center center /
+        100%;
+      vertical-align: sub;
+      &:focus {
+        outline: transparent;
+      }
     }
   }
 }
