@@ -87,6 +87,11 @@
   min-width: 80px;
   padding: 0 25px;
 }
+%btn--sm {
+  height: 26px;
+  min-width: 50px;
+  padding: 0 10px;
+}
 // 버튼별 스타일
 .btn {
   // Primary btn
@@ -107,11 +112,16 @@
     @extend .btn__primary;
     @extend %btn--lg;
   }
+  &__primary--sm {
+    @extend .btn__primary;
+    @extend %btn--sm;
+    padding: 0 10px;
+  }
 
   // btn__secondary btn
   &__secondary {
     @extend %btn;
-    background: $primary-2;
+    background: $gray-40;
     color: $white;
 
     &:disabled {
@@ -124,6 +134,11 @@
   &__secondary--lg {
     @extend .btn__secondary;
     @extend %btn--lg;
+  }
+  &__secondary--sm {
+    @extend .btn__secondary;
+    @extend %btn--sm;
+    padding: 0 10px;
   }
 
   // Primary-line btn
@@ -143,13 +158,18 @@
     @extend .btn__primary-line;
     @extend %btn--lg;
   }
+  &__primary-line--sm {
+    @extend .btn__primary-line;
+    @extend %btn--sm;
+    padding: 0 10px;
+  }
 
   // Secondary-line btn
   &__secondary-line {
     @extend %btn;
     background: $white;
     color: $gray-50;
-    border: 1px solid $gray-50;
+    border: 1px solid $gray-40;
     padding: 0 18px;
 
     &:disabled {
@@ -160,6 +180,11 @@
   &__secondary-line--lg {
     @extend .btn__secondary-line;
     @extend %btn--lg;
+  }
+  &__secondary-line--sm {
+    @extend .btn__secondary-line;
+    @extend %btn--sm;
+    padding: 0 10px;
   }
 
   // Search btn
@@ -576,7 +601,8 @@ p.form__error {
       color: $gray-70;
       &:hover,
       &:focus {
-        background: $gray-5;
+        color: $gray-40;
+        background: $primary-3;
       }
     }
   }
@@ -660,7 +686,7 @@ p.form__error {
     border-collapse: separate;
     border-spacing: 0;
     border: {
-      top: 1px solid #a2a2a2;
+      top: 2px solid $gray-60;
       bottom: 1px solid $gray-20;
     }
     text-align: center;
@@ -671,17 +697,18 @@ p.form__error {
 
     th,
     td {
+      font-size: 12px;
       word-break: break-all;
-      border-right: 1px solid $gray-20;
+      // border-right: 1px solid $gray-20;
       box-sizing: border-box;
       cursor: default;
-      &:last-child {
-        border-right: 1px solid transparent;
-      }
+      // &:last-child {
+      //   border-right: 1px solid transparent;
+      // }
     }
 
     thead {
-      background: $gray-5;
+      background: $white;
       th {
         height: 35px;
         padding: 0 3px;
@@ -697,7 +724,7 @@ p.form__error {
 
     tbody {
       tr {
-        border-bottom: 1px solid $gray-20;
+        border-bottom: 1px solid $gray-10;
         border-collapse: separate;
         background: transparent;
 
@@ -731,7 +758,8 @@ p.form__error {
         &:hover,
         &.grid--active {
           td {
-            background: #ecf0fb78;
+            color: $gray-40;
+            background: $primary-3;
             cursor: default;
           }
         }
