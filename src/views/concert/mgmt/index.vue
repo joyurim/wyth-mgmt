@@ -459,6 +459,7 @@ export default {
     },
     addConcert() {
       // 콘서트 추가
+      this.$router.push({ path: '/concert/concert-mgmt/detail' })
     },
     changePage(page) {
       // 페이지네이션

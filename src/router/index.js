@@ -17,6 +17,15 @@ const routes = [
           import(/* webpackChunkName: "concert" */ '@/views/concert/mgmt'),
       },
       {
+        // 콘서트 관리
+        path: '/concert/concert-mgmt/detail',
+        name: 'ConcertMgmtId',
+        component: () =>
+          import(
+            /* webpackChunkName: "concert" */ '@/views/concert/mgmt/Detail.vue'
+          ),
+      },
+      {
         // 좌석 정보
         path: '/concert/seat-info',
         name: 'SeatInfo',
@@ -76,18 +85,18 @@ const routes = [
       {
         path: '/example/date-picker',
         name: 'DatePicker',
-        component: () => import('@/views/example/date-picker')
+        component: () => import('@/views/example/date-picker'),
       },
       {
         path: '/example/element-ui',
         name: 'ElementUi',
-        component: () => import('@/views/example/element-ui')
+        component: () => import('@/views/example/element-ui'),
       },
       {
         path: '/example/vue-select',
         name: 'VueSelect',
-        component: () => import('@/views/example/vue-select')
-      }
+        component: () => import('@/views/example/vue-select'),
+      },
     ],
   },
 ]
