@@ -1,6 +1,6 @@
 <template>
   <section aria-label="콘서트 정보 등록 화면">
-    {{ mode }}
+    {{pageTitle}}
     <div class="form__box">
       <!-- 콘서트 Id -->
       <article class="flex mb-2">
@@ -23,7 +23,7 @@
       <article class="flex">
         <label
           class="form__label"
-          :class="{ 'form__label--required': mode == 'create' }"
+          :class="{ 'form__label--required': mode === 'create' }"
           >콘서트 명</label
         >
         <div class="flex-1">
@@ -81,15 +81,23 @@
 </template>
 
 <script>
-import mode from '@/mixin/pageMode'
+import pageMode from '@/mixin/pageMode'
 export default {
   name: 'ConcertMgmtDetail',
-  mixins: [mode],
+  mixins: [pageMode],
+  data() {
+    return{
+      pageName: '콘서트 관리'
+    }
+  },
+  mounted() {
+  },
   methods: {
     deleteDetail() {
       // 삭제
     },
     moveList() {
+      this.$router.push({name:'ConcertMgmt'})
       // 목록
     },
     moveCancel() {
@@ -97,6 +105,7 @@ export default {
     },
     changeModifyMode() {
       // 수정
+      this.isModify = true
     },
     saveDetail() {
       // 저장

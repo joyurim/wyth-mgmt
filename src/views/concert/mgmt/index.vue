@@ -149,7 +149,7 @@
                 <td>{{ c.exposureYn }}</td>
                 <td>{{ c.rgstrDate }}</td>
                 <td>
-                  <button type="button" class="btn__secondary-line--sm">
+                  <button type="button" class="btn__secondary-line--sm" @click="detail">
                     상세
                   </button>
                 </td>
@@ -459,7 +459,16 @@ export default {
     },
     addConcert() {
       // 콘서트 추가
-      this.$router.push({ path: '/concert/concert-mgmt/detail' })
+      const routeObject = {
+        name: 'ConcertMgmtId',
+        params: {
+          mode: 'create'
+        }
+      }
+      this.$router.push(routeObject)
+    },
+    detail() {
+      this.$router.push({name: 'ConcertMgmtId', params: {mode: 'read'}})
     },
     changePage(page) {
       // 페이지네이션
