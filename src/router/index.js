@@ -99,6 +99,12 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/login',
+    name: 'SmMgmtLogin',
+    component: () =>
+      import(/* webpackChunkName: "login" */ '@/layout/SmMgmtLogin.vue'),
+  },
 ]
 
 const router = new VueRouter({
