@@ -41,7 +41,7 @@
     .btn__logout {
       width: 16px;
       height: 16px;
-      background: url(@/assets/img/icon__logout.png) no-repeat center center /
+      background: url(assets/img/icon__logout.png) no-repeat center center /
         100%;
       vertical-align: sub;
       &:focus {
@@ -60,7 +60,7 @@
         width: 8px;
         height: 8px;
         margin: 0 4px;
-        background: url(@/assets/img/icon__arrow-up.png) no-repeat center center /
+        background: url(assets/img/icon__arrow-up.png) no-repeat center center /
           100%;
         transform: rotate(90deg);
       }
@@ -579,7 +579,7 @@ p.form__error {
         content: '';
         width: 13px;
         height: 8px;
-        background: url('@/assets/img/icon__arrow-down.png') no-repeat center
+        background: url('assets/img/icon__arrow-down.png') no-repeat center
           center/16px;
         transition: 0.2s ease-out;
       }
@@ -599,7 +599,7 @@ p.form__error {
         content: '';
         width: 13px;
         height: 9px;
-        background: url('@/assets/img/icon__arrow-up.png') no-repeat center
+        background: url('assets/img/icon__arrow-up.png') no-repeat center
           center/16px;
         transition: 0.2s ease-out;
       }

@@ -175,7 +175,7 @@
   </section>
 </template>
 <script>
-import GridPagination from '@/components/common/GridPagination'
+import GridPagination from '../../../components/common/GridPagination'
 import datePicker from 'vue2-datepicker'
 
 export default {

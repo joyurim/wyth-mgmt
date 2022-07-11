@@ -149,7 +149,7 @@ export default {
           display: inline-block;
           width: 9px;
           height: 9px;
-          background: url('@/assets/img/icon__arrow-left.png') no-repeat center
+          background: url('assets/img/icon__arrow-left.png') no-repeat center
             center / 9px;
           transform: rotate(180deg);
         }
@@ -160,7 +160,7 @@ export default {
           display: inline-block;
           width: 9px;
           height: 9px;
-          background: url('@/assets/img/icon__arrow-left.png') no-repeat center
+          background: url('assets/img/icon__arrow-left.png') no-repeat center
             center / 9px;
         }
       }
@@ -170,7 +170,7 @@ export default {
           display: inline-block;
           width: 9px;
           height: 9px;
-          background: url('@/assets/img/icon__arrow-double-left.png') no-repeat
+          background: url('assets/img/icon__arrow-double-left.png') no-repeat
             center center / 9px;
           transform: rotate(180deg);
         }
@@ -181,7 +181,7 @@ export default {
           display: inline-block;
           width: 9px;
           height: 9px;
-          background: url('@/assets/img/icon__arrow-double-left.png') no-repeat
+          background: url('assets/img/icon__arrow-double-left.png') no-repeat
             center center / 9px;
         }
       }

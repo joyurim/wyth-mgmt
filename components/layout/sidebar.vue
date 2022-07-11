@@ -1,9 +1,9 @@
 <template>
   <nav class="flex flex-col sidebar">
     <h1 class="logo mb-8">
-      <router-link to="/concert/concert-mgmt">
+      <nuxt-link to="/concert/mgmt">
         <img src="@/assets/img/logo.png" alt="SM Ent 관리자" />
-      </router-link>
+      </nuxt-link>
     </h1>
     <ul class="sidebar__wrap">
       <li
@@ -18,8 +18,8 @@
             :key="`sidebar-sub-menu-${subMenu.menuId}`"
             class="submenu"
           >
-            <router-link :to="subMenu.menuUrl" class="menu">
-              {{ subMenu.menuName }}</router-link
+            <NuxtLink :to="subMenu.menuUrl" class="menu">
+              {{ subMenu.menuName }}</NuxtLink
             >
           </li>
         </ul>
@@ -167,7 +167,7 @@ export default {
       width: 16px;
       height: 16px;
       margin-right: 5px;
-      background: url(@/assets/img/icon__logout.png) no-repeat center center /
+      background: url(assets/img/icon__logout.png) no-repeat center center /
         100%;
       vertical-align: sub;
       &:focus {

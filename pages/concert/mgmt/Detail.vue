@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import pageMode from '@/mixin/pageMode'
+import pageMode from '../../../mixin/pageMode'
 export default {
   name: 'ConcertMgmtDetail',
   mixins: [pageMode],
