@@ -265,6 +265,7 @@
 // input focus 스타일
 %form--focus {
   border: 1px solid $gray-60;
+  outline-color: $primary-4;
   &::placeholder {
     color: transparent;
   }
@@ -472,6 +473,12 @@
     color: $gray-70;
     box-sizing: border-box;
 
+    &--300 {
+      flex: inherit;
+      width: 50%;
+      min-width: 200px;
+      max-width: 300px;
+    }
     &::placeholder {
       font-size: 13px;
       color: $gray-50;
@@ -539,7 +546,7 @@ p.form__error {
   &.vs--open {
     // focus style
     .vs__dropdown-toggle {
-      border-color: $gray-60;
+      border-color: $primary-4;
     }
   }
   .vs__dropdown-toggle {
@@ -613,7 +620,7 @@ p.form__error {
     padding: 0;
     box-shadow: none;
     border-radius: 0;
-    border-color: $gray-60;
+    border-color: $primary-4;
 
     .vs__dropdown-option {
       padding: 2px 5px;
@@ -851,6 +858,35 @@ p.form__error {
     height: 30px;
     .vs__selected-options {
       height: 30px;
+    }
+  }
+}
+
+.form__box {
+  .mx-datepicker {
+    // width: 120px;
+    .mx-input-wrapper {
+      width: 100%;
+      .mx-input {
+        height: 30px;
+        border-radius: 0;
+        &:focus,
+        &:hover {
+          border-color: $primary-4;
+        }
+      }
+    }
+    &.mx-datepicker--readonly {
+      .mx-input-wrapper {
+        pointer-events: none;
+        .mx-input {
+          background: $gray-1;
+          border: 1px solid $gray-20;
+        }
+        .mx-icon-calendar {
+          display: none;
+        }
+      }
     }
   }
 }
