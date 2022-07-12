@@ -42,6 +42,15 @@ const routes = [
           ),
       },
       {
+        // 좌석 정보 상세
+        path: '/concert/seat-info/add',
+        name: 'SeatInfoAdd',
+        component: () =>
+          import(
+            /* webpackChunkName: "concert" */ '@/views/concert/seat-info/Add.vue'
+          ),
+      },
+      {
         // 아티스트 관리
         path: '/basic-info/artist',
         name: 'ArtistMgmt',

@@ -3,8 +3,8 @@
     <div v-if="totalCount > limit" class="w-40 pagi__select">
       <v-select
         v-model="limit"
-        label="codeNm"
         :options="limitList"
+        label="codeNm"
         :reduce="(limit) => limit.codeVal"
         :searchable="false"
         @input="changePage(0)"

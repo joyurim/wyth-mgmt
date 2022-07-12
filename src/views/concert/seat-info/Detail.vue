@@ -1,14 +1,10 @@
 <template>
-  <section aria-label="좌석 관리 상세 화면">
-    {{ pageTitle }}
-  </section>
+  <section aria-label="좌석 관리 상세 화면">상세조회</section>
 </template>
 
 <script>
-import pageMode from '@/mixin/pageMode'
 export default {
   name: 'SeatInfoDetail',
-  mixins: [pageMode],
 }
 </script>
 

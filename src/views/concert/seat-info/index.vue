@@ -390,7 +390,7 @@ export default {
     addSeat() {
       // 등록,재등록
       const routeObject = {
-        name: 'SeatInfoDetail',
+        name: 'SeatInfoAdd',
         params: {
           mode: 'create',
         },
