@@ -1,9 +1,9 @@
 <template>
   <nav class="flex flex-col sidebar">
     <h1 class="logo mb-8">
-      <nuxt-link to="/concert/mgmt">
+      <NuxtLink to="/concert/mgmt">
         <img src="@/assets/img/logo.png" alt="SM Ent 관리자" />
-      </nuxt-link>
+      </NuxtLink>
     </h1>
     <ul class="sidebar__wrap">
       <li
@@ -42,7 +42,7 @@ export default {
             {
               menuId: 'menu1-1',
               menuName: '콘서트 관리',
-              menuUrl: '/concert/concert-mgmt',
+              menuUrl: '/concert/mgmt',
             },
             {
               menuId: 'menu1-2',

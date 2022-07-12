@@ -4,17 +4,19 @@
     <section class="flex-1 flex flex-col layout">
       <div class="layout__top">
         <ul class="flex items-center breadcrumb">
-          <li><nuxt-link to="/">홈</nuxt-link></li>
-          <li><nuxt-link to="/">콘서트</nuxt-link></li>
-          <li><nuxt-link to="/">리스트</nuxt-link></li>
+          <li><NuxtLink to="/">홈</NuxtLink></li>
+          <li><NuxtLink to="/">콘서트</NuxtLink></li>
+          <li><NuxtLink to="/">리스트</NuxtLink></li>
         </ul>
         <div>
           <span class="point-color">홍길동</span>님 안녕하세요.
           <button type="button" class="btn__logout"></button>
         </div>
       </div>
-      <nuxt/>
     </section>
+    <div>
+    <nuxt/>
+    </div>
   </div>
 </template>
 

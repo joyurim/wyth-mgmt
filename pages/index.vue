@@ -10,6 +10,7 @@ import LayoutIndex from "../components/layout/index"
 
 export default {
   name: 'IndexPage',
+  layout: 'LayoutIndex',
   components: {LayoutIndex}
 }
 </script>
