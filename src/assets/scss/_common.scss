@@ -486,6 +486,12 @@
       min-width: 200px;
       max-width: 300px;
     }
+    &--100 {
+      flex: inherit;
+      width: 100%;
+      min-width: 50px;
+      max-width: 100px;
+    }
     &::placeholder {
       font-size: 13px;
       color: $gray-50;

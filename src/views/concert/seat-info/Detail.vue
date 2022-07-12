@@ -8,24 +8,44 @@
           <!-- 콘서트 ID -->
           <div class="flex-1 flex items-center pr-8">
             <label class="form__label">콘서트 ID</label>
-            <input type="text" readonly class="form__input" />
+            <input
+              v-model="concertInfo.id"
+              type="text"
+              readonly
+              class="form__input"
+            />
           </div>
           <!-- 콘서트 노출여부 -->
           <div class="flex-1 flex items-center pl-8">
             <label class="form__label">콘서트 노출여부</label>
-            <input type="text" readonly class="form__input" />
+            <input
+              v-model="concertInfo.exposureYn"
+              type="text"
+              readonly
+              class="form__input"
+            />
           </div>
         </div>
         <div class="flex items-center mt-2">
           <!-- 콘서트 명 -->
           <div class="flex-1 flex items-center pr-8">
             <label class="form__label">콘서트 명 </label>
-            <input type="text" readonly class="form__input" />
+            <input
+              v-model="concertInfo.name"
+              type="text"
+              readonly
+              class="form__input"
+            />
           </div>
           <!-- 공연장 -->
           <div class="flex-1 flex items-center pl-8">
             <label class="form__label">공연장</label>
-            <input type="text" readonly class="form__input" />
+            <input
+              v-model="concertInfo.hall"
+              type="text"
+              readonly
+              class="form__input"
+            />
           </div>
         </div>
       </div>
@@ -38,24 +58,44 @@
           <!-- 콘서트 회차 -->
           <div class="flex-1 flex items-center pr-8">
             <label class="form__label">콘서트 회차</label>
-            <input type="text" readonly class="form__input" />
+            <input
+              v-model="roundInfo.round"
+              type="text"
+              readonly
+              class="form__input"
+            />
           </div>
           <!-- 노출여부 -->
           <div class="flex-1 flex items-center pl-8">
             <label class="form__label">노출여부</label>
-            <input type="text" readonly class="form__input" />
+            <input
+              v-model="roundInfo.exposureYn"
+              type="text"
+              readonly
+              class="form__input"
+            />
           </div>
         </div>
         <div class="flex items-center mt-2">
-          <!-- 공연일 -->
+          <!-- 콘서트 일시 -->
           <div class="flex-1 flex items-center pr-8">
-            <label class="form__label">공연일</label>
-            <input type="text" readonly class="form__input" />
+            <label class="form__label">콘서트 일시</label>
+            <input
+              v-model="roundInfo.date"
+              type="text"
+              readonly
+              class="form__input"
+            />
           </div>
           <!-- 등록 좌석수 -->
           <div class="flex-1 flex items-center pl-8">
             <label class="form__label">등록 좌석수</label>
-            <input type="text" readonly class="form__input" />
+            <input
+              v-model="roundInfo.seatsNum"
+              type="text"
+              readonly
+              class="form__input"
+            />
           </div>
         </div>
       </div>
@@ -216,6 +256,18 @@ export default {
   },
   data() {
     return {
+      concertInfo: {
+        id: '',
+        exposureYn: '',
+        name: '',
+        hall: '',
+      },
+      roundInfo: {
+        round: '',
+        exposureYn: '',
+        date: '',
+        seatsNum: '',
+      },
       seatInfo: {
         matchingStatus: '전체',
         matchingStatusList: ['전체', 'Y', 'N'],

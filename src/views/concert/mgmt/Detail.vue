@@ -137,9 +137,9 @@
         </div>
       </div>
       <!-- 콘서트 회차  -->
-      <div class="flex items-center">
+      <div class="flex items-center mt-2">
         <label
-          class="form__label mt-2"
+          class="form__label"
           :class="{
             'form__label--required': mode === 'create' || mode === 'modify',
           }"
@@ -236,8 +236,8 @@
         </div>
       </div>
       <!-- 노출여부 -->
-      <div class="flex items-center">
-        <label class="form__label mt-2">노출여부 </label>
+      <div class="flex items-center mt-2">
+        <label class="form__label">노출여부 </label>
         <div class="form__radio">
           <input
             id="concert-mgmt-exposureYn-n"
@@ -262,9 +262,9 @@
         </div>
       </div>
       <!-- 응원도구 이름  -->
-      <div class="flex items-center">
+      <div class="flex items-center mt-2">
         <label
-          class="form__label mt-2"
+          class="form__label"
           :class="{
             'form__label--required': mode === 'create' || mode === 'modify',
           }"
