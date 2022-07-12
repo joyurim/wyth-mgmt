@@ -1,10 +1,10 @@
 <template>
   <section aria-label="콘서트 정보 등록 화면">
-    <div class="form__box">
+    <article class="form__box">
       <!-- id -->
       <div class="flex items-center">
         <!-- 콘서트 Id -->
-        <article class="flex flex-1 pr-8">
+        <div class="flex flex-1 pr-8">
           <label class="form__label">콘서트 ID</label>
           <div class="flex-1">
             <input
@@ -15,9 +15,9 @@
               class="form__input"
             />
           </div>
-        </article>
+        </div>
         <!-- 콘서트 관리 Id -->
-        <article class="flex flex-1 pl-8">
+        <div class="flex flex-1 pl-8">
           <label class="form__label">콘서트 관리 ID</label>
           <div class="flex-1">
             <input
@@ -28,10 +28,10 @@
               class="form__input"
             />
           </div>
-        </article>
+        </div>
       </div>
       <!-- 콘서트 명 -->
-      <article class="flex flex-col mt-2">
+      <div class="flex flex-col mt-2">
         <!-- 콘서트명 -->
         <div class="flex items-center">
           <label
@@ -64,9 +64,9 @@
             />
           </div>
         </div>
-      </article>
+      </div>
       <!-- 아티스트 명  -->
-      <article class="flex items-center">
+      <div class="flex items-center">
         <label
           class="form__label mt-2"
           :class="{
@@ -100,9 +100,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </div>
       <!-- 콘서트 기간  -->
-      <article class="flex items-center mt-2">
+      <div class="flex items-center mt-2">
         <label
           class="form__label mt-2"
           :class="{
@@ -135,9 +135,9 @@
             }"
           />
         </div>
-      </article>
+      </div>
       <!-- 콘서트 회차  -->
-      <article class="flex items-center">
+      <div class="flex items-center">
         <label
           class="form__label mt-2"
           :class="{
@@ -199,9 +199,9 @@
             </template>
           </div>
         </div>
-      </article>
+      </div>
       <!-- 공연장 명 -->
-      <article class="flex flex-col mt-2">
+      <div class="flex flex-col mt-2">
         <!-- 공연장 명 -->
         <div class="flex items-center">
           <label
@@ -234,9 +234,9 @@
             />
           </div>
         </div>
-      </article>
+      </div>
       <!-- 노출여부 -->
-      <article class="flex items-center">
+      <div class="flex items-center">
         <label class="form__label mt-2">노출여부 </label>
         <div class="form__radio">
           <input
@@ -260,9 +260,9 @@
           />
           <label for="concert-mgmt-exposureYn-y">노출</label>
         </div>
-      </article>
+      </div>
       <!-- 응원도구 이름  -->
-      <article class="flex items-center">
+      <div class="flex items-center">
         <label
           class="form__label mt-2"
           :class="{
@@ -289,9 +289,9 @@
             </div>
           </div>
         </div>
-      </article>
+      </div>
       <!-- 콘서트 이미지  -->
-      <article class="flex items-center mt-2">
+      <div class="flex items-center mt-2">
         <label
           class="form__label"
           :class="{
@@ -325,9 +325,9 @@
             &#8251; 업로드 된 이미지는 944 x 512로 저장됩니다.
           </p>
         </div>
-      </article>
+      </div>
       <!-- 콘서트 정보  -->
-      <article class="flex items-center mt-2">
+      <div class="flex items-center mt-2">
         <label class="form__label">콘서트 정보 </label>
         <!-- 에디터 영역 -->
         <div class="flex-1">
@@ -338,7 +338,7 @@
             previewStyle="vertical"
           />
         </div>
-      </article>
+      </div>
       <!-- 등록/수정 정보 -->
       <template v-if="mode !== 'create'">
         <div class="flex items-center mt-2">
@@ -368,9 +368,9 @@
           </div>
         </div>
       </template>
-    </div>
+    </article>
     <!-- 버튼 영역 -->
-    <div class="flex justify-between mt-4">
+    <article class="flex justify-between mt-4">
       <button
         v-if="mode === 'modify'"
         class="btn__secondary-line--lg"
@@ -408,7 +408,7 @@
           저장
         </button>
       </div>
-    </div>
+    </article>
   </section>
 </template>
 
