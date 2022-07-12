@@ -11,24 +11,16 @@
         />
       </div>
       <!-- 콘서트명 -->
-      <div class="w-64 mr-1">
-        <v-select
+      <div class="mr-1">
+        <input
           v-model="search.concertNm"
-          :options="search.concertNmList"
-          label="name"
-          :searchable="false"
+          type="text"
+          :placeholder="concertNmPla"
+          :readonly="search.searchType.name === '전체'"
+          class="form__input"
         />
       </div>
-      <!-- 회차 -->
-      <!-- TODO : 회차는 콘서트 명에서 특정 콘서트를 선택했을 경우에만 노출됩니다. -->
-      <div class="w-16">
-        <v-select
-          v-model="search.round"
-          :options="search.roundList"
-          label="name"
-          :searchable="false"
-        />
-      </div>
+
       <!-- 상태 -->
       <div class="flex items-center ml-7 mr-4">
         <label class="search-form__label">상태</label>
@@ -149,7 +141,11 @@
                 <td>{{ c.exposureYn }}</td>
                 <td>{{ c.rgstrDate }}</td>
                 <td>
-                  <button type="button" class="btn__secondary-line--sm" @click="detail">
+                  <button
+                    type="button"
+                    class="btn__secondary-line--sm"
+                    @click="detail"
+                  >
                     상세
                   </button>
                 </td>
@@ -195,7 +191,7 @@ export default {
             code: 'searchTypeAll',
           },
           {
-            name: '공연명',
+            name: '콘서트 명',
             code: 'concretNm',
           },
           {
@@ -203,46 +199,8 @@ export default {
             code: 'artist',
           },
         ],
-        // 콘서트명 선택
-        concertNm: '콘서트1',
-        concertNmList: [
-          {
-            name: '콘서트1',
-            code: 'concert1',
-          },
-          {
-            name: '콘서트 2(회차노출)',
-            code: 'concert2',
-          },
-          {
-            name: '콘서트 3',
-            code: 'concert3',
-          },
-        ],
-        // 회차
-        round: '1',
-        roundList: [
-          {
-            name: '5',
-            code: 'round5',
-          },
-          {
-            name: '4',
-            code: 'round4',
-          },
-          {
-            name: '3',
-            code: 'round3',
-          },
-          {
-            name: '2',
-            code: 'round2',
-          },
-          {
-            name: '1',
-            code: 'round1',
-          },
-        ],
+        // 콘서트명
+        concertNm: '',
         // 상태
         status: '전체',
         statusList: [
@@ -444,6 +402,17 @@ export default {
       },
     }
   },
+  computed: {
+    concertNmPla() {
+      if (this.search.searchType.name === '콘서트 명') {
+        return '콘서트 명 입력해 주세요.'
+      } else if (this.search.searchType.name === '아티스트') {
+        return '아티스트를 입력해 주세요.'
+      } else {
+        return ''
+      }
+    },
+  },
   methods: {
     // datepicker
     // 시작일 선택값 변경
@@ -460,15 +429,19 @@ export default {
     addConcert() {
       // 콘서트 추가
       const routeObject = {
-        name: 'ConcertMgmtId',
+        name: 'ConcertMgmtDetail',
         params: {
-          mode: 'create'
-        }
+          mode: 'create',
+        },
       }
       this.$router.push(routeObject)
     },
     detail() {
-      this.$router.push({name: 'ConcertMgmtId', params: {mode: 'read'}})
+      // 상세조회
+      this.$router.push({ name: 'ConcertMgmtDetail', params: { mode: 'read' } })
+    },
+    delete() {
+      // 삭제
     },
     changePage(page) {
       // 페이지네이션

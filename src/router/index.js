@@ -17,9 +17,9 @@ const routes = [
           import(/* webpackChunkName: "concert" */ '@/views/concert/mgmt'),
       },
       {
-        // 콘서트 관리
+        // 콘서트 관리 상세
         path: '/concert/concert-mgmt/detail',
-        name: 'ConcertMgmtId',
+        name: 'ConcertMgmtDetail',
         component: () =>
           import(
             /* webpackChunkName: "concert" */ '@/views/concert/mgmt/Detail.vue'
@@ -31,6 +31,15 @@ const routes = [
         name: 'SeatInfo',
         component: () =>
           import(/* webpackChunkName: "concert" */ '@/views/concert/seat-info'),
+      },
+      {
+        // 좌석 정보 상세
+        path: '/concert/seat-info/detail',
+        name: 'SeatInfoDetail',
+        component: () =>
+          import(
+            /* webpackChunkName: "concert" */ '@/views/concert/seat-info/Detail.vue'
+          ),
       },
       {
         // 아티스트 관리
