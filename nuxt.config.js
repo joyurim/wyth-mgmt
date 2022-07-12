@@ -23,12 +23,14 @@ export default {
   css:[
     '~assets/scss/tailwind.css',
     '~assets/scss/_common.scss',
-    '~assets/scss/login.scss'
+    '~assets/scss/login.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/element-ui'
+    '~/plugins/element-ui',
+    '~/plugins/datepicker',
+    '~/plugins/vue-select'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

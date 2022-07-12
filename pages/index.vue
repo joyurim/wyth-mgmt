@@ -1,7 +1,7 @@
 <template>
   <div>
     <layout-index/>
-    <nuxt/>
+    <Nuxt/>
   </div>
 </template>
 
