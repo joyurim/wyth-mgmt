@@ -1,11 +1,10 @@
 <template>
   <section aria-label="콘서트 정보 등록 화면">
-    {{ pageTitle }}
     <div class="form__box">
       <!-- id -->
       <div class="flex items-center">
         <!-- 콘서트 Id -->
-        <article class="flex flex-1 pr-2">
+        <article class="flex flex-1 pr-8">
           <label class="form__label">콘서트 ID</label>
           <div class="flex-1">
             <input
@@ -18,7 +17,7 @@
           </div>
         </article>
         <!-- 콘서트 관리 Id -->
-        <article class="flex flex-1 pl-2">
+        <article class="flex flex-1 pl-8">
           <label class="form__label">콘서트 관리 ID</label>
           <div class="flex-1">
             <input
@@ -262,7 +261,7 @@
           <label for="concert-mgmt-exposureYn-y">노출</label>
         </div>
       </article>
-      <!-- 아티스트 명  -->
+      <!-- 응원도구 이름  -->
       <article class="flex items-center">
         <label
           class="form__label mt-2"
@@ -291,12 +290,61 @@
           </div>
         </div>
       </article>
+      <!-- 콘서트 이미지  -->
+      <article class="flex items-center mt-2">
+        <label
+          class="form__label"
+          :class="{
+            'form__label--required': mode === 'create' || mode === 'modify',
+          }"
+          >콘서트 이미지
+        </label>
+        <!-- 업로드 된 파일 -->
+        <div class="flex-1">
+          <div class="flex items-bottom form__file">
+            <div
+              v-for="(file, idx) in form.apndFiles"
+              :key="`concert-mgmt-file-${idx}`"
+              class="form__file--update mr-2"
+            >
+              <!-- {{ file.name }} -->
+              <img :src="file.img" alt="" />
+            </div>
+            <div v-if="mode !== 'read'" class="form__file--btn self-end">
+              <label for="fileUpdate">파일 업로드</label>
+              <input
+                type="file"
+                id="fileUpdate"
+                ref="fileUpdate"
+                @change="uplodeFileName"
+              />
+            </div>
+          </div>
+          <p v-if="mode !== 'read'" class="form__infotext">
+            &#8251; 이미지 확장자 jpg, png로 업로드해주세요.<br />
+            &#8251; 업로드 된 이미지는 944 x 512로 저장됩니다.
+          </p>
+        </div>
+      </article>
+      <!-- 콘서트 정보  -->
+      <article class="flex items-center mt-2">
+        <label class="form__label">콘서트 정보 </label>
+        <!-- 에디터 영역 -->
+        <div class="flex-1">
+          <Editor
+            ref="editor"
+            :initialValue="form.editorText"
+            initialEditType="markdown"
+            previewStyle="vertical"
+          />
+        </div>
+      </article>
       <!-- 등록/수정 정보 -->
       <template v-if="mode !== 'create'">
-        <div class="flex items-center mt-5">
+        <div class="flex items-center mt-2">
           <div class="flex items-center flex-1 pr-8">
             <!-- 등록 정보 -->
-            <label class="form__label">등록 정보</label>
+            <label class="form__label">작성자/작성일시</label>
             <div class="flex-1">
               <input
                 type="text"
@@ -308,7 +356,7 @@
           </div>
           <div class="flex flex-1 pl-8">
             <!-- 수정 정보 -->
-            <label class="form__label">수정 정보</label>
+            <label class="form__label">수정자/수정일시 </label>
             <div class="flex-1">
               <input
                 type="text"
@@ -322,25 +370,58 @@
       </template>
     </div>
     <!-- 버튼 영역 -->
-    <div class="flex justify-between mb-8">
-      <button class="btn__secondary-line--lg" @click="deleteDetail">
+    <div class="flex justify-between mt-4">
+      <button
+        v-if="mode === 'modify'"
+        class="btn__secondary-line--lg"
+        @click="deleteDetail"
+      >
         삭제
       </button>
-      <div class="">
-        <button class="btn__primary-line--lg" @click="moveList">목록</button>
-        <button class="btn__primary-line--lg" @click="moveCancel">취소</button>
-        <button class="btn__primary--lg" @click="changeModifyMode">수정</button>
-        <button class="btn__primary--lg" @click="saveDetail">저장</button>
+      <div class="w-full text-right">
+        <button
+          v-if="mode !== 'create'"
+          class="btn__primary-line--lg mr-1"
+          @click="moveList"
+        >
+          목록
+        </button>
+        <button
+          v-if="mode === 'create'"
+          class="btn__primary-line--lg mr-1"
+          @click="moveCancel"
+        >
+          취소
+        </button>
+        <button
+          v-if="mode === 'read'"
+          class="btn__primary--lg"
+          @click="changeModifyMode"
+        >
+          수정
+        </button>
+        <button
+          v-if="mode !== 'read'"
+          class="btn__primary--lg"
+          @click="saveDetail"
+        >
+          저장
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import '@toast-ui/editor/dist/toastui-editor.css'
+import { Editor } from '@toast-ui/vue-editor'
 import pageMode from '@/mixin/pageMode'
 export default {
   name: 'ConcertMgmtDetail',
   mixins: [pageMode],
+  components: {
+    Editor,
+  },
   data() {
     return {
       pageName: '콘서트 관리',
@@ -419,6 +500,8 @@ export default {
             cheeringTool: '',
           },
         ],
+        apndFiles: [], // 파일 업로드
+        editorText: '',
       },
     }
   },
@@ -450,6 +533,11 @@ export default {
     disabledEndRange(date) {
       // 종료일 선택값 변경
       return date < new Date()
+    },
+    // 첨부파일
+    uplodeFileName() {
+      let file = this.$refs.fileUpdate.files[0]
+      this.form.apndFiles.push(file)
     },
   },
 }
