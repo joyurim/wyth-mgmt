@@ -33,9 +33,9 @@
   &__top {
     @apply flex-none flex items-center justify-between;
     padding: 0 30px;
-    height: 36px;
-    // margin-bottom: 10px;
-    // border-bottom: 1px solid $gray-20;
+    height: 41px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $gray-20;
     text-align: right;
     .point-color {
       font-weight: 500;
@@ -57,7 +57,7 @@
     padding: 0 30px 30px;
   }
   .breadcrumb {
-    min-height: 36px;
+    min-height: 40px;
     li {
       height: 28px;
       line-height: 28px;
@@ -322,9 +322,9 @@
   }
   &__box {
     // margin-top: 10px;
-    border-top: 1px solid $gray-30;
-    border-bottom: 1px solid $gray-30;
-    padding: 20px 10px;
+    // border-top: 1px solid $gray-40;
+    border-bottom: 1px solid $gray-20;
+    padding: 10px 10px 20px;
   }
   // CheckBox Style
   &__checkbox {
