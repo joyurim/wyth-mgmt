@@ -8,24 +8,119 @@
     @cancel="cancelPopup"
     @closed="handleClosed"
   >
-    <!-- 팝업 내용 -->
-    모달 팝업 입니다
+    <div class="grid">
+      <article class="search-form">
+        <div class="w-32 mr-1">
+          <v-select
+            v-model="search.searchType"
+            :options="search.searchTypeList"
+            label="name"
+            :searchable="false"
+          />
+        </div>
+        <div class="mr-1">
+          <input
+            v-model="search.keyword"
+            type="text"
+            class="form__input"
+            @keyup.enter="inquiry"
+          />
+        </div>
+        <button class="btn__search" @click="inquiry">검색</button>
+      </article>
+      <article class="grid__countbox">
+        <div class="grid__count">
+          Total :
+          <span class="grid__count--point">{{ grid.page.totalCount }}</span> 건
+        </div>
+      </article>
+      <article class="grid__wrap">
+        <table class="grid__base">
+          <colgroup>
+            <col width="25%" />
+            <col width="25%" />
+            <col width="25%" />
+            <col width="25%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>응원도구 ID</th>
+              <th>응원도구 이름</th>
+              <th>디바이스 이름</th>
+              <th>모델명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-if="grid.page.totalCount > 0">
+              <tr
+                v-for="c in grid.cheeringToolList"
+                :key="`concert-mgmt-detail-popup-${c.id}`"
+              >
+                <td>{{ c.cheeringId }}</td>
+                <td>{{ c.cheeringNm }}</td>
+                <td>{{ c.deviceNm }}</td>
+                <td>{{ c.modelNm }}</td>
+              </tr>
+            </template>
+            <tr class="no-data" v-if="grid.page.totalCount === 0">
+              <td colspan="4">검색된 결과가 없습니다.</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      <GridPagination
+        v-if="grid.page.totalCount > 0"
+        :total-count="grid.page.totalCount"
+        :current-page="grid.page.currentPage"
+        :limit="grid.page.limit"
+        @changePage="changePage"
+      />
+    </div>
   </Popup>
 </template>
 
 <script>
 import Popup from '@/components/common/PopupBasic'
+import GridPagination from '@/components/common/GridPagination'
 
 export default {
   name: 'CheeringToolPP',
   components: {
     Popup,
+    GridPagination,
   },
   data() {
     return {
       popup: {
         name: 'cheeringToolPopup',
         title: '응원도구 조회',
+        width: '800',
+      },
+      search: {
+        searchType: '전체',
+        searchTypeList: [
+          '전체',
+          '응원도구 ID',
+          '응원도구 이름',
+          '디바이스 이름',
+          '모델명',
+        ],
+        keyword: '',
+      },
+      grid: {
+        cheeringToolList: [
+          {
+            cheeringId: '20',
+            cheeringNm: '',
+            deviceNm: '',
+            modelNm: '',
+          },
+        ],
+        page: {
+          totalCount: 100,
+          currentPage: 0,
+          limit: 10,
+        },
       },
     }
   },
@@ -33,6 +128,13 @@ export default {
     this.open()
   },
   methods: {
+    inquiry() {
+      // 조회
+    },
+    changePage(page) {
+      // 페이지네이션
+      this.grid.page.currentPage = page
+    },
     open() {
       this.$modal.show(this.popup.name)
     },
