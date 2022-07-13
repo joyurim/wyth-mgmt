@@ -16,7 +16,6 @@
           v-model="search.artistNm"
           type="text"
           placeholder="아티스트 명을 입력해주세요."
-          :readonly="search.artistType.name === '전체'"
           class="form__input"
         />
       </div>
