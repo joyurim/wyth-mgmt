@@ -574,10 +574,13 @@
         border: 0;
       }
     }
-    &--update {
+    &--img {
       width: 300px;
       height: 163px;
-      background: red;
+      background: $gray-10;
+    }
+    &--update {
+      line-height: 32px;
     }
   }
   &__infotext {

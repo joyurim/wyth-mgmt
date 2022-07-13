@@ -104,18 +104,6 @@
     <article class="form__box flex items-center">
       <label class="form__label font-medium">좌석정보 관리</label>
       <div class="flex-1 flex items-center">
-        <!-- 매칭 상태 -->
-        <div class="flex items-center mr-6">
-          <label class="form__label form__label--sm">매칭 상태</label>
-          <div class="w-28 mr-1">
-            <v-select
-              v-model="seatInfo.matchingStatus"
-              :options="seatInfo.matchingStatusList"
-              label="name"
-              :searchable="false"
-            />
-          </div>
-        </div>
         <!-- Floor -->
         <div class="flex items-center mr-6">
           <label class="form__label form__label--sm">Floor</label>

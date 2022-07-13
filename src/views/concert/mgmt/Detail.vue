@@ -307,7 +307,7 @@
             <div
               v-for="(file, idx) in form.apndFiles"
               :key="`concert-mgmt-file-${idx}`"
-              class="form__file--update mr-2"
+              class="form__file--img mr-2"
             >
               <!-- {{ file.name }} -->
               <img :src="file.img" alt="" />
