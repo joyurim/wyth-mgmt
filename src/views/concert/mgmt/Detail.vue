@@ -283,7 +283,9 @@
               class="form__input form__input--300"
             />
             <div v-if="mode === 'create' || mode === 'modify'" class="ml-2">
-              <button class="btn__secondary">검색</button>
+              <button class="btn__secondary" @click="openCheeringTool">
+                검색
+              </button>
               <button class="btn__secondary-line mx-2">초기화</button>
               <button class="btn__primary-line">추가</button>
             </div>
@@ -409,6 +411,9 @@
         </button>
       </div>
     </article>
+
+    <!-- 응원도구 검색 팝업 -->
+    <CheeringToolPP v-if="popup.cheeringToolPP" @closePopup="closePopup" />
   </section>
 </template>
 
@@ -416,11 +421,13 @@
 import '@toast-ui/editor/dist/toastui-editor.css'
 import { Editor } from '@toast-ui/vue-editor'
 import pageMode from '@/mixin/pageMode'
+import CheeringToolPP from '@/views/concert/mgmt/CheeringToolPP'
 export default {
   name: 'ConcertMgmtDetail',
   mixins: [pageMode],
   components: {
     Editor,
+    CheeringToolPP,
   },
   data() {
     return {
@@ -503,6 +510,9 @@ export default {
         apndFiles: [], // 파일 업로드
         editorText: '',
       },
+      popup: {
+        cheeringToolPP: false,
+      },
     }
   },
   mounted() {},
@@ -538,6 +548,13 @@ export default {
     uplodeFileName() {
       let file = this.$refs.fileUpdate.files[0]
       this.form.apndFiles.push(file)
+    },
+    // 응원도구 검색 팝업 오픈
+    openCheeringTool() {
+      this.popup.cheeringToolPP = true
+    },
+    closePopup() {
+      this.popup.cheeringToolPP = false
     },
   },
 }

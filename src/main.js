@@ -9,7 +9,7 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
-
+import VModal from 'vue-js-modal'
 
 Vue.config.productionTip = false
 Vue.component('v-select', vSelect)
@@ -17,6 +17,7 @@ Vue.component('v-select', vSelect)
 Vue.use(Element)
 Vue.use(DatePicker)
 Vue.use(vSelect)
+Vue.use(VModal, { dynamic: true })
 
 new Vue({
   router,
