@@ -2,7 +2,7 @@
   <section aria-label="응원도구 관리 조회 화면">
     <article aria-label="검색 영역" class="search-form">
       <!-- 응원도구 명 -->
-      <div class="mr-4">
+      <div class="flex items-center mr-4">
         <label class="search-form__label">응원도구 이름</label>
         <input v-model="search.cheeringTool" type="text" class="form__input" />
       </div>
@@ -47,40 +47,49 @@
         </div>
       </div>
       <!-- 리스트 -->
-      <!-- <div class="grid__wrap">
+      <div class="grid__wrap">
         <table class="grid__base">
           <colgroup>
+            <col width="10%" />
+            <col width="25%" />
             <col width="15%" />
-            <col width="40%" />
             <col width="15%" />
             <col width="15%" />
-            <col width="15%" />
+            <col width="10%" />
+            <col width="10%" />
           </colgroup>
           <thead>
             <tr>
-              <th>아티스트 ID</th>
-              <th>아티스트 명</th>
-              <th>데뷔일</th>
-              <th>타입</th>
-              <th>노출여뷰</th>
+              <th>응원도구 ID</th>
+              <th>응원도구 이름</th>
+              <th>연동 프로토콜</th>
+              <th>디바이스 이름</th>
+              <th>모델명</th>
+              <th>펌웨어 업데이트</th>
+              <th>노출여부</th>
             </tr>
           </thead>
           <tbody>
             <template v-if="grid.page.totalCount > 0">
-              <tr v-for="a in grid.artistList" :key="`artist-list-${a.id}`">
-                <td>{{ a.artistId }}</td>
-                <td>{{ a.artistNm }}</td>
-                <td>{{ a.debutDate }}</td>
-                <td>{{ a.debutType }}</td>
-                <td>{{ a.exposureYn }}</td>
+              <tr
+                v-for="c in grid.cheeringToolList"
+                :key="`cheering-tool-list-${c.id}`"
+              >
+                <td>{{ c.toolId }}</td>
+                <td>{{ c.toolNm }}</td>
+                <td>{{ c.protocol }}</td>
+                <td>{{ c.deviceNm }}</td>
+                <td>{{ c.modelNm }}</td>
+                <td>{{ c.firmware }}</td>
+                <td>{{ c.exposureYn }}</td>
               </tr>
             </template>
             <tr class="no-data" v-if="grid.page.totalCount === 0">
-              <td colspan="5">검색된 결과가 없습니다.</td>
+              <td colspan="7">검색된 결과가 없습니다.</td>
             </tr>
           </tbody>
         </table>
-      </div> -->
+      </div>
       <GridPagination
         v-if="grid.page.totalCount > 0"
         :total-count="grid.page.totalCount"
@@ -93,8 +102,13 @@
 </template>
 
 <script>
+import GridPagination from '@/components/common/GridPagination'
+
 export default {
   name: 'CheeringTtoolMgmt',
+  components: {
+    GridPagination,
+  },
   data() {
     return {
       search: {
@@ -106,11 +120,11 @@ export default {
             code: 'exposureYnAll',
           },
           {
-            name: 'Y',
+            name: '노출',
             code: 'exposure',
           },
           {
-            name: 'N',
+            name: '비노출',
             code: 'unexposed',
           },
         ],
@@ -118,25 +132,27 @@ export default {
         firmwareList: [
           {
             name: '전체',
-            code: 'exposureYnAll',
+            code: 'all',
           },
           {
             name: 'Y',
-            code: 'exposure',
+            code: 'Y',
           },
           {
             name: 'N',
-            code: 'unexposed',
+            code: 'N',
           },
         ],
       },
       grid: {
-        artistList: [
+        cheeringToolList: [
           {
-            artistId: '33',
-            artistNm: '레드벨벳',
-            debutDate: '2014.08.04',
-            debutType: '그룹',
+            toolId: '33',
+            toolNm: '엑소봉 Ver.3',
+            protocol: 'BEATRO_V1',
+            deviceNm: 'EXO_FANLIGHT',
+            modelNm: 'SME-EXO-OFL03',
+            firmware: 'Y',
             exposureYn: '노출',
           },
         ],
@@ -152,7 +168,16 @@ export default {
     inquiry() {
       // 조회
     },
-    addCheeringTool() {},
+    addCheeringTool() {
+      // 응원도구 추가
+      const routeObject = {
+        name: 'CheeringToolDetail',
+        params: {
+          mode: 'create',
+        },
+      }
+      this.$router.push(routeObject)
+    },
     changePage(page) {
       // 페이지네이션
       this.grid.page.currentPage = page

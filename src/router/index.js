@@ -69,6 +69,15 @@ const routes = [
           ),
       },
       {
+        // 응원도구 관리 상세
+        path: '/basic-info/cheering-tool/detail',
+        name: 'CheeringToolDetail',
+        component: () =>
+          import(
+            /* webpackChunkName: "basic-info" */ '@/views/basic-info/cheering-tool/Detail.vue'
+          ),
+      },
+      {
         // 공연별 통계
         path: '/statistics/show',
         name: 'ShowStatistics',

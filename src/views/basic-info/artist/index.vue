@@ -57,7 +57,7 @@
               <th>아티스트 명</th>
               <th>데뷔일</th>
               <th>타입</th>
-              <th>노출여뷰</th>
+              <th>노출여부</th>
             </tr>
           </thead>
           <tbody>
