@@ -11,7 +11,7 @@
         />
       </div>
       <!-- 아티스트명 -->
-      <div class="mr-1">
+      <div class="mr-4">
         <input
           v-model="search.artistNm"
           type="text"
@@ -46,10 +46,11 @@
         <table class="grid__base">
           <colgroup>
             <col width="15%" />
-            <col width="40%" />
+            <col width="30%" />
             <col width="15%" />
             <col width="15%" />
             <col width="15%" />
+            <col width="10%" />
           </colgroup>
           <thead>
             <tr>
@@ -58,6 +59,7 @@
               <th>데뷔일</th>
               <th>타입</th>
               <th>노출여부</th>
+              <th>보기</th>
             </tr>
           </thead>
           <tbody>
@@ -68,10 +70,19 @@
                 <td>{{ a.debutDate }}</td>
                 <td>{{ a.debutType }}</td>
                 <td>{{ a.exposureYn }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn__secondary-line--sm"
+                    @click="detail"
+                  >
+                    상세
+                  </button>
+                </td>
               </tr>
             </template>
             <tr class="no-data" v-if="grid.page.totalCount === 0">
-              <td colspan="5">검색된 결과가 없습니다.</td>
+              <td colspan="6">검색된 결과가 없습니다.</td>
             </tr>
           </tbody>
         </table>
@@ -151,6 +162,10 @@ export default {
   methods: {
     inquiry() {
       // 조회
+    },
+    detail() {
+      // 상세조회
+      this.$router.push({ name: 'ArtistMgmtDetail', params: { mode: 'read' } })
     },
     changePage(page) {
       // 페이지네이션

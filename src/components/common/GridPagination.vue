@@ -10,27 +10,26 @@
         @input="changePage(0)"
       />
     </div>
-    <client-only>
-      <vue-ads-pagination
-        :total-items="totalCount"
-        :page="currentPage"
-        :items-per-page="Number(limit)"
-      >
-        <template slot-scope="props">
-          <div class="hidden">{{ props }}</div>
-        </template>
 
-        <template slot="buttons" slot-scope="props">
-          <vue-ads-page-button
-            v-for="(button, key) in props.buttons"
-            :key="key"
-            class="btn--pagination my-2"
-            v-bind="button"
-            @page-change="changePage(button.page)"
-          />
-        </template>
-      </vue-ads-pagination>
-    </client-only>
+    <vue-ads-pagination
+      :total-items="totalCount"
+      :page="currentPage"
+      :items-per-page="Number(limit)"
+    >
+      <template slot-scope="props">
+        <div class="hidden">{{ props }}</div>
+      </template>
+
+      <template slot="buttons" slot-scope="props">
+        <vue-ads-page-button
+          v-for="(button, key) in props.buttons"
+          :key="key"
+          class="btn--pagination my-2"
+          v-bind="button"
+          @page-change="changePage(button.page)"
+        />
+      </template>
+    </vue-ads-pagination>
   </div>
 </template>
 

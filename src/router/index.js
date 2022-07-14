@@ -60,6 +60,15 @@ const routes = [
           ),
       },
       {
+        // 아티스트 관리 상세
+        path: '/basic-info/artist/detail',
+        name: 'ArtistMgmtDetail',
+        component: () =>
+          import(
+            /* webpackChunkName: "basic-info" */ '@/views/basic-info/artist/Detail.vue'
+          ),
+      },
+      {
         // 응원도구 관리
         path: '/basic-info/cheering-tool',
         name: 'CheeringTtoolMgmt',

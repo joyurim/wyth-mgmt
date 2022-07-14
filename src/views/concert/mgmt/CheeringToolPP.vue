@@ -37,17 +37,25 @@
       <article class="grid__wrap">
         <table class="grid__base">
           <colgroup>
-            <col width="25%" />
-            <col width="25%" />
-            <col width="25%" />
-            <col width="25%" />
+            <col width="10%" />
+            <col width="15%" />
+            <col width="15%" />
+            <col width="15%" />
+            <col width="15%" />
+            <col width="10%" />
+            <col width="10%" />
+            <col width="10%" />
           </colgroup>
           <thead>
             <tr>
               <th>응원도구 ID</th>
               <th>응원도구 이름</th>
+              <th>연동 프로토콜</th>
               <th>디바이스 이름</th>
               <th>모델명</th>
+              <th>펌웨어<br />업데이트</th>
+              <th>노출여부</th>
+              <th>선택</th>
             </tr>
           </thead>
           <tbody>
@@ -57,9 +65,17 @@
                 :key="`concert-mgmt-detail-popup-${c.id}`"
               >
                 <td>{{ c.cheeringId }}</td>
+                <td>{{ c.protocol }}</td>
                 <td>{{ c.cheeringNm }}</td>
                 <td>{{ c.deviceNm }}</td>
                 <td>{{ c.modelNm }}</td>
+                <td>{{ c.firmware }}</td>
+                <td>{{ c.exposureYn }}</td>
+                <td>
+                  <div class="form__radio justify-center">
+                    <input v-model="c.select" type="radio" value="Y" />
+                  </div>
+                </td>
               </tr>
             </template>
             <tr class="no-data" v-if="grid.page.totalCount === 0">
@@ -93,7 +109,7 @@ export default {
     return {
       popup: {
         name: 'cheeringToolPopup',
-        title: '응원도구 조회',
+        title: '응원도구 검색',
         width: '800',
       },
       search: {
@@ -111,9 +127,13 @@ export default {
         cheeringToolList: [
           {
             cheeringId: '20',
-            cheeringNm: '',
-            deviceNm: '',
-            modelNm: '',
+            cheeringNm: '엑소봉 Ver.3',
+            protocol: 'BEATRO_V1',
+            deviceNm: 'EXO_FANLIGHT',
+            modelNm: 'SME-EXO-OFL03',
+            firmware: 'Y',
+            exposureYn: '노출',
+            select: 'Y',
           },
         ],
         page: {

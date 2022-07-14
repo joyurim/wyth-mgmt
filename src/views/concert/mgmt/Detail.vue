@@ -78,7 +78,7 @@
             class="flex items-center mt-2"
           >
             <input
-              v-model="form.artist"
+              v-model="form.artistNm"
               type="text"
               :readonly="mode === 'read' || mode === 'modify'"
               class="form__input form__input--300"
@@ -253,6 +253,45 @@
             :class="{ 'radio--readonly': mode === 'read' }"
           />
           <label for="concert-mgmt-exposureYn-y">노출</label>
+        </div>
+        <div class="flex items-center">
+          <date-picker
+            v-model="form.userAppDate"
+            value-type="format"
+            :lang="form.lang"
+            :clearable="false"
+            :disabled-date="disabledStartRange"
+            :readonly="mode === 'read'"
+            :class="{
+              ['mx-datepicker--readonly']: mode === 'read',
+            }"
+            class="mr-1"
+          />
+          <div class="w-28 mr-1">
+            <v-select
+              v-model="form.userAppHour"
+              :options="form.hourList"
+              label="name"
+              :searchable="false"
+              :readonly="mode === 'read'"
+              :class="{
+                ['select--readonly']: mode === 'read',
+              }"
+            />
+          </div>
+          <div class="w-28">
+            <v-select
+              v-model="form.userAppMinute"
+              :options="form.minuteList"
+              label="name"
+              :searchable="false"
+              :readonly="mode === 'read'"
+              :class="{
+                ['select--readonly']: mode === 'read',
+              }"
+            />
+          </div>
+          <span class="ml-2 form__infotext">(*)사용자앱에 노출 예정 시각</span>
         </div>
       </div>
       <!-- 응원도구 이름  -->
@@ -433,7 +472,7 @@ export default {
         concertNmEng: '',
         artistList: [
           {
-            artist: '',
+            artistNm: '',
             artistEngNm: '',
           },
         ],
@@ -503,6 +542,9 @@ export default {
         ],
         apndFiles: [], // 파일 업로드
         editorText: '',
+        userAppDate: '',
+        userAppHour: '',
+        userAppMinute: '',
       },
       popup: {
         cheeringToolPP: false,

@@ -2,9 +2,10 @@
   <section aria-label="응원정보 상세 화면">
     {{ pageTitle }}
     <button class="btn__primary--lg" @click="changeModifyMode">수정</button>
+    <!-- 기본정보 -->
     <article class="form__box">
       <!-- 응원도구 Id -->
-      <div class="flex flex-1">
+      <div class="flex items-center">
         <label class="form__label">응원도구 ID</label>
         <div class="flex-1">
           <input
@@ -211,6 +212,34 @@
         </div>
       </div>
     </article>
+    <!-- 이미지 정보 -->
+    <article class="form__box">
+      <!-- 응원도구 대표이미지  -->
+      <div class="flex items-center">
+        <label class="form__label">콘서트 이미지 </label>
+        <!-- 업로드 된 파일 -->
+        <div class="flex-1">
+          <div class="flex items-bottom form__file">
+            <div
+              v-for="(file, idx) in form.imgInfo.apndFiles"
+              :key="`cheering-tool-file-${idx}`"
+              class="form__file--img mr-2"
+            >
+              <img :src="file.img" alt="" />
+            </div>
+            <div v-if="mode !== 'read'" class="form__file--btn self-end">
+              <label for="fileUpdate">파일 업로드</label>
+              <input
+                type="file"
+                id="fileUpdate"
+                ref="fileUpdate"
+                @change="uplodeFileName"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   </section>
 </template>
 
@@ -235,6 +264,9 @@ export default {
           firmwareUrl: '',
           exposureYn: 'N',
         },
+        imgInfo: {
+          apndFiles: [],
+        },
       },
     }
   },
@@ -242,6 +274,11 @@ export default {
     changeModifyMode() {
       // 수정
       this.isModify = true
+    },
+    // 첨부파일
+    uplodeFileName() {
+      let file = this.$refs.fileUpdate.files[0]
+      this.form.imgInfo.apndFiles.push(file)
     },
   },
 }

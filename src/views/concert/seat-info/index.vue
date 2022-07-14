@@ -22,11 +22,11 @@
       </div>
       <!-- 노출여부 -->
       <div class="flex items-center mr-4">
-        <label class="search-form__label">노출여부</label>
+        <label class="search-form__label">회차 노출여부</label>
         <div class="w-24">
           <v-select
-            v-model="search.exposureYn"
-            :options="search.exposureYnList"
+            v-model="search.roundExposureYn"
+            :options="search.roundExposureYnList"
             label="name"
             :searchable="false"
           />
@@ -83,12 +83,12 @@
             <col width="9%" />
             <col width="11%" />
             <col width="4%" />
+            <col width="6%" />
             <col width="5%" />
             <col width="7%" />
             <col width="10%" />
             <col width="6%" />
             <col width="7%" />
-            <col width="6%" />
           </colgroup>
           <thead>
             <tr>
@@ -99,12 +99,12 @@
               <th>공연일</th>
               <th>공연장</th>
               <th>노출여부</th>
+              <th>회차 노출여부</th>
               <th>좌석수</th>
               <th>좌석명</th>
               <th>좌석명(영문)</th>
               <th>보기</th>
               <th>좌석등록</th>
-              <th>삭제</th>
             </tr>
           </thead>
           <tbody>
@@ -120,6 +120,7 @@
                 <td>{{ s.concretDate }}</td>
                 <td>{{ s.concertHall }}</td>
                 <td>{{ s.exposureYn }}</td>
+                <td>{{ s.roundExposureYn }}</td>
                 <td>{{ s.seatsNum }}</td>
                 <td>{{ s.seatsNm }}</td>
                 <td>{{ s.seatsNmEng }}</td>
@@ -140,9 +141,6 @@
                   >
                     등록/재등록
                   </button>
-                </td>
-                <td>
-                  <button type="button" class="btn__secondary--sm">삭제</button>
                 </td>
               </tr>
             </template>
@@ -195,8 +193,8 @@ export default {
         // 콘서트 명
         concertNm: '',
         // 노출여부
-        exposureYn: '전체',
-        exposureYnList: [
+        roundExposureYn: '전체',
+        roundExposureYnList: [
           {
             name: '전체',
             code: 'exposureYnAll',
@@ -254,6 +252,7 @@ export default {
             concretDate: '2022-01-17 19:00',
             concertHall: '올림픽 체조경기장',
             exposureYn: '노출',
+            roundExposureYn: '노출',
             seatsNum: '12,800',
             seatsNm: '층,구역,열,번호',
             seatsNmEng: 'Floor,Zone,Row,Col',
@@ -266,6 +265,7 @@ export default {
             concretDate: '2022-01-18 19:00',
             concertHall: '올림픽 체조경기장',
             exposureYn: '비노출',
+            roundExposureYn: '노출',
             seatsNum: '-',
             seatsNm: '-',
             seatsNmEng: '-',
@@ -278,6 +278,7 @@ export default {
             concretDate: '2022-01-19 19:00',
             concertHall: '올림픽 체조경기장',
             exposureYn: '비노출',
+            roundExposureYn: '노출',
             seatsNum: '-',
             seatsNm: '-',
             seatsNmEng: '-',
@@ -290,6 +291,7 @@ export default {
             concretDate: '2021-12-17 19:00',
             concertHall: '고척스카이돔',
             exposureYn: '노출',
+            roundExposureYn: '노출',
             seatsNum: '12,800',
             seatsNm: '층,구역,열,번호',
             seatsNmEng: 'Floor,Zone,Row,Col',
@@ -302,6 +304,7 @@ export default {
             concretDate: '2021-12-18 18:00',
             concertHall: '고척스카이돔',
             exposureYn: '비노출',
+            roundExposureYn: '노출',
             seatsNum: '-',
             seatsNm: '-',
             seatsNmEng: '-',
@@ -314,6 +317,7 @@ export default {
             concretDate: '2021-12-19 17:00',
             concertHall: '고척스카이돔',
             exposureYn: '비노출',
+            roundExposureYn: '노출',
             seatsNum: '-',
             seatsNm: '-',
             seatsNmEng: '-',
@@ -326,6 +330,7 @@ export default {
             concretDate: '2021-02-22 15:00',
             concertHall: '올림픽 체조경기장',
             exposureYn: '노출',
+            roundExposureYn: '노출',
             seatsNum: '12,800',
             seatsNm: '층,구역,열,번호',
             seatsNmEng: 'Floor,Zone,Row,Col',
@@ -338,6 +343,7 @@ export default {
             concretDate: '2021-01-01 15:00',
             concertHall: '올림픽공원 올림픽홀',
             exposureYn: '비노출',
+            roundExposureYn: '노출',
             seatsNum: '-',
             seatsNm: '-',
             seatsNmEng: '-',
@@ -350,6 +356,7 @@ export default {
             concretDate: '2021-01-01 20:00',
             concertHall: '올림픽공원 올림픽홀',
             exposureYn: '비노출',
+            roundExposureYn: '노출',
             seatsNum: '-',
             seatsNm: '-',
             seatsNmEng: '-',
