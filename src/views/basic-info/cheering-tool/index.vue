@@ -50,13 +50,14 @@
       <div class="grid__wrap">
         <table class="grid__base">
           <colgroup>
-            <col width="10%" />
-            <col width="25%" />
+            <col width="8%" />
+            <col width="19%" />
             <col width="15%" />
             <col width="15%" />
             <col width="15%" />
             <col width="10%" />
             <col width="10%" />
+            <col width="8%" />
           </colgroup>
           <thead>
             <tr>
@@ -67,6 +68,7 @@
               <th>모델명</th>
               <th>펌웨어 업데이트</th>
               <th>노출여부</th>
+              <th>보기</th>
             </tr>
           </thead>
           <tbody>
@@ -82,6 +84,15 @@
                 <td>{{ c.modelNm }}</td>
                 <td>{{ c.firmware }}</td>
                 <td>{{ c.exposureYn }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn__secondary-line--sm"
+                    @click="detail"
+                  >
+                    상세
+                  </button>
+                </td>
               </tr>
             </template>
             <tr class="no-data" v-if="grid.page.totalCount === 0">
@@ -177,6 +188,13 @@ export default {
         },
       }
       this.$router.push(routeObject)
+    },
+    detail() {
+      // 상세조회
+      this.$router.push({
+        name: 'CheeringToolDetail',
+        params: { mode: 'read' },
+      })
     },
     changePage(page) {
       // 페이지네이션

@@ -320,7 +320,7 @@
 
 .form {
   &__label {
-    align-self: normal;
+    align-self: center;
     line-height: 32px;
     min-width: 180px;
 
@@ -579,12 +579,20 @@
       }
     }
     &--img {
-      width: 300px;
-      height: 163px;
+      width: 120px;
+      height: 68px;
       background: $gray-10;
     }
     &--update {
       line-height: 32px;
+    }
+    &--delete {
+      width: 16px;
+      height: 16px;
+      background: #edf1ff url(@/assets/img/icon__close.png) no-repeat center
+        center / 8px;
+      border-radius: 50%;
+      vertical-align: middle;
     }
   }
   &__infotext {

@@ -1,7 +1,5 @@
 <template>
-  <section aria-label="응원정보 상세 화면">
-    {{ pageTitle }}
-    <button class="btn__primary--lg" @click="changeModifyMode">수정</button>
+  <section aria-label="응원정보 상세 화면" class="CheeringTool">
     <!-- 기본정보 -->
     <article class="form__box">
       <!-- 응원도구 Id -->
@@ -212,32 +210,333 @@
         </div>
       </div>
     </article>
-    <!-- 이미지 정보 -->
-    <article class="form__box">
-      <!-- 응원도구 대표이미지  -->
-      <div class="flex items-center">
-        <label class="form__label">콘서트 이미지 </label>
-        <!-- 업로드 된 파일 -->
-        <div class="flex-1">
-          <div class="flex items-bottom form__file">
-            <div
-              v-for="(file, idx) in form.imgInfo.apndFiles"
-              :key="`cheering-tool-file-${idx}`"
-              class="form__file--img mr-2"
-            >
-              <img :src="file.img" alt="" />
-            </div>
-            <div v-if="mode !== 'read'" class="form__file--btn self-end">
-              <label for="fileUpdate">파일 업로드</label>
-              <input
-                type="file"
-                id="fileUpdate"
-                ref="fileUpdate"
-                @change="uplodeFileName"
-              />
-            </div>
+    <!-- 응원도구 대표이미지  -->
+    <article class="form__box flex items-center">
+      <label class="form__label">응원도구 대표이미지</label>
+      <!-- 업로드 된 파일 -->
+      <div class="flex-1 flex">
+        <div class="flex items-bottom mr-4">
+          <img
+            class="form__file--img mr-2"
+            :src="form.imgInfo.mainThumbnail.imgSrc"
+            alt=""
+          />
+          <div v-if="form.imgInfo.mainThumbnail" class="self-end">
+            <p class="form__infotext">
+              파일 사이즈 : {{ form.imgInfo.mainThumbnail.width }} x
+              {{ form.imgInfo.mainThumbnail.height }}
+            </p>
+            <p class="form__infotext">
+              {{ form.imgInfo.mainThumbnail.imgName }}
+              <button
+                v-if="mode !== 'read'"
+                type="button"
+                class="form__file--delete"
+              >
+                <span class="hide">삭제</span>
+              </button>
+            </p>
           </div>
         </div>
+        <div v-if="mode !== 'read'" class="form__file--btn self-end">
+          <label for="fileUpdate">찾기</label>
+          <input
+            type="file"
+            id="fileUpdate"
+            ref="fileUpdate"
+            @change="uplodeFileName"
+          />
+        </div>
+      </div>
+    </article>
+    <!-- 응원도구 전원버튼 이미지 -->
+    <article class="form__box flex items-center">
+      <label class="form__label">응원도구 전원버튼 이미지</label>
+      <!-- 업로드 된 파일 -->
+      <div class="flex-1 flex">
+        <div class="flex items-bottom mr-4">
+          <img
+            class="form__file--img mr-2"
+            :src="form.imgInfo.powerBtnImg.imgSrc"
+            alt=""
+          />
+          <div v-if="form.imgInfo.powerBtnImg" class="self-end">
+            <p class="form__infotext">
+              파일 사이즈 : {{ form.imgInfo.powerBtnImg.width }} x
+              {{ form.imgInfo.powerBtnImg.height }}
+            </p>
+            <p class="form__infotext">
+              {{ form.imgInfo.powerBtnImg.imgName }}
+              <button
+                v-if="mode !== 'read'"
+                type="button"
+                class="form__file--delete"
+              >
+                <span class="hide">삭제</span>
+              </button>
+            </p>
+          </div>
+        </div>
+        <div v-if="mode !== 'read'" class="form__file--btn self-end">
+          <label for="fileUpdate">찾기</label>
+          <input
+            type="file"
+            id="fileUpdate"
+            ref="fileUpdate"
+            @change="uplodeFileName"
+          />
+        </div>
+      </div>
+    </article>
+    <!-- 응원도구 탐색 이미지 -->
+    <article class="form__box flex items-center">
+      <label class="form__label">응원도구 탐색 이미지</label>
+      <!-- 업로드 된 파일 -->
+      <div class="flex-1 flex">
+        <div class="flex items-bottom mr-4">
+          <img
+            class="form__file--img mr-2"
+            :src="form.imgInfo.navImg.imgSrc"
+            alt=""
+          />
+          <div v-if="form.imgInfo.navImg" class="self-end">
+            <p class="form__infotext">
+              파일 사이즈 : {{ form.imgInfo.navImg.width }} x
+              {{ form.imgInfo.navImg.height }}
+            </p>
+            <p class="form__infotext">
+              {{ form.imgInfo.navImg.imgName }}
+              <button
+                v-if="mode !== 'read'"
+                type="button"
+                class="form__file--delete"
+              >
+                <span class="hide">삭제</span>
+              </button>
+            </p>
+          </div>
+        </div>
+        <div v-if="mode !== 'read'" class="form__file--btn self-end">
+          <label for="fileUpdate">찾기</label>
+          <input
+            type="file"
+            id="fileUpdate"
+            ref="fileUpdate"
+            @change="uplodeFileName"
+          />
+        </div>
+      </div>
+    </article>
+    <!-- 응원도구 좌석매핑 이미지 -->
+    <article class="form__box flex items-center">
+      <label class="form__label">응원도구 좌석매핑 이미지</label>
+      <div class="flex-1">
+        <div class="text-right">
+          <button type="button" class="btn__primary-line mr-2">추가</button>
+          <button type="button" class="btn__secondary-line">전체 삭제</button>
+        </div>
+        <!-- 업로드 된 파일 -->
+        <div
+          v-for="(mapping, idx) in form.imgInfo.mappingImgs"
+          :key="`cheering-tool-file-${idx}`"
+          class="flex-1 flex"
+        >
+          <div class="flex items-bottom mr-4">
+            <div class="self-center mr-4">{{ mapping.id }}</div>
+            <img class="form__file--img mr-2" :src="mapping.imgSrc" alt="" />
+            <div v-if="mapping" class="self-end">
+              <p class="form__infotext">
+                파일 사이즈 : {{ mapping.width }} x
+                {{ mapping.height }}
+              </p>
+              <p class="form__infotext">
+                {{ mapping.imgName }}
+                <button
+                  v-if="mode !== 'read'"
+                  type="button"
+                  class="form__file--delete"
+                >
+                  <span class="hide">삭제</span>
+                </button>
+              </p>
+            </div>
+          </div>
+          <div v-if="mode !== 'read'" class="form__file--btn self-end">
+            <label for="fileUpdate">찾기</label>
+            <input
+              type="file"
+              id="fileUpdate"
+              ref="fileUpdate"
+              @change="uplodeFileName"
+            />
+          </div>
+        </div>
+      </div>
+    </article>
+    <!-- 응원도구 좌석매핑 정산완료 후 이미지 -->
+    <article class="form__box flex items-center">
+      <label class="form__label form__label--notHeight"
+        >응원도구 좌석매핑<br />정산완료 후 이미지</label
+      >
+      <!-- 업로드 된 파일 -->
+      <div class="flex-1 flex">
+        <div class="flex items-bottom mr-4">
+          <img
+            class="form__file--img mr-2"
+            :src="form.imgInfo.calculateImg.imgSrc"
+            alt=""
+          />
+          <div v-if="form.imgInfo.calculateImg" class="self-end">
+            <p class="form__infotext">
+              파일 사이즈 : {{ form.imgInfo.calculateImg.width }} x
+              {{ form.imgInfo.calculateImg.height }}
+            </p>
+            <p class="form__infotext">
+              {{ form.imgInfo.calculateImg.imgName }}
+              <button
+                v-if="mode !== 'read'"
+                type="button"
+                class="form__file--delete"
+              >
+                <span class="hide">삭제</span>
+              </button>
+            </p>
+          </div>
+        </div>
+        <div v-if="mode !== 'read'" class="form__file--btn self-end">
+          <label for="fileUpdate">찾기</label>
+          <input
+            type="file"
+            id="fileUpdate"
+            ref="fileUpdate"
+            @change="uplodeFileName"
+          />
+        </div>
+      </div>
+    </article>
+    <!-- 응원도구 연결삭제 이미지 -->
+    <article class="form__box flex items-center">
+      <label class="form__label">응원도구 연결삭제 이미지</label>
+      <!-- 업로드 된 파일 -->
+      <div class="flex-1 flex">
+        <div class="flex items-bottom mr-4">
+          <img
+            class="form__file--img mr-2"
+            :src="form.imgInfo.dltCnctnImg.imgSrc"
+            alt=""
+          />
+          <div v-if="form.imgInfo.dltCnctnImg" class="self-end">
+            <p class="form__infotext">
+              파일 사이즈 : {{ form.imgInfo.dltCnctnImg.width }} x
+              {{ form.imgInfo.dltCnctnImg.height }}
+            </p>
+            <p class="form__infotext">
+              {{ form.imgInfo.dltCnctnImg.imgName }}
+              <button
+                v-if="mode !== 'read'"
+                type="button"
+                class="form__file--delete"
+              >
+                <span class="hide">삭제</span>
+              </button>
+            </p>
+          </div>
+        </div>
+        <div v-if="mode !== 'read'" class="form__file--btn self-end">
+          <label for="fileUpdate">찾기</label>
+          <input
+            type="file"
+            id="fileUpdate"
+            ref="fileUpdate"
+            @change="uplodeFileName"
+          />
+        </div>
+      </div>
+    </article>
+    <!-- 펌웨어 애니메이션 이미지 -->
+    <article class="form__box flex items-center">
+      <label class="form__label">펌웨어 애니메이션 이미지</label>
+      <div class="flex-1">
+        <div class="text-right">
+          <button type="button" class="btn__primary-line mr-2">추가</button>
+          <button type="button" class="btn__secondary-line">전체 삭제</button>
+        </div>
+        <!-- 업로드 된 파일 -->
+        <div
+          v-for="(frmwrAnmtn, idx) in form.imgInfo.frmwrAnmtnImgs"
+          :key="`cheering-tool-file-${idx}`"
+          class="flex-1 flex"
+        >
+          <div class="flex items-bottom mr-4">
+            <div class="self-center mr-4">{{ frmwrAnmtn.id }}</div>
+            <img class="form__file--img mr-2" :src="frmwrAnmtn.imgSrc" alt="" />
+            <div v-if="frmwrAnmtn" class="self-end">
+              <p class="form__infotext">
+                파일 사이즈 : {{ frmwrAnmtn.width }} x
+                {{ frmwrAnmtn.height }}
+              </p>
+              <p class="form__infotext">
+                {{ frmwrAnmtn.imgName }}
+                <button
+                  v-if="mode !== 'read'"
+                  type="button"
+                  class="form__file--delete"
+                >
+                  <span class="hide">삭제</span>
+                </button>
+              </p>
+            </div>
+          </div>
+          <div v-if="mode !== 'read'" class="form__file--btn self-end">
+            <label for="fileUpdate">찾기</label>
+            <input
+              type="file"
+              id="fileUpdate"
+              ref="fileUpdate"
+              @change="uplodeFileName"
+            />
+          </div>
+        </div>
+      </div>
+    </article>
+    <!-- 버튼영역 -->
+    <article class="flex justify-between mt-4">
+      <button
+        v-if="mode === 'modify'"
+        class="btn__secondary-line--lg"
+        @click="deleteDetail"
+      >
+        삭제
+      </button>
+      <div class="w-full text-right">
+        <button
+          v-if="mode !== 'create'"
+          class="btn__primary-line--lg mr-1"
+          @click="moveList"
+        >
+          목록
+        </button>
+        <button
+          v-if="mode === 'create'"
+          class="btn__primary-line--lg mr-1"
+          @click="moveCancel"
+        >
+          취소
+        </button>
+        <button
+          v-if="mode === 'read'"
+          class="btn__primary--lg"
+          @click="changeModifyMode"
+        >
+          수정
+        </button>
+        <button
+          v-if="mode !== 'read'"
+          class="btn__primary--lg"
+          @click="saveDetail"
+        >
+          저장
+        </button>
       </div>
     </article>
   </section>
@@ -265,23 +564,100 @@ export default {
           exposureYn: 'N',
         },
         imgInfo: {
-          apndFiles: [],
+          mainThumbnail: {
+            imgSrc: require('@/assets/img/img__sample.jpg'),
+            width: '450',
+            height: '1000',
+            imgName: '이미지 파일명',
+          },
+          powerBtnImg: {
+            imgSrc: require('@/assets/img/img__sample.jpg'),
+            width: '450',
+            height: '1000',
+            imgName: '이미지 파일명',
+          },
+          navImg: {
+            imgSrc: require('@/assets/img/img__sample.jpg'),
+            width: '450',
+            height: '1000',
+            imgName: '이미지 파일명',
+          },
+          mappingImgs: [
+            {
+              id: '01',
+              imgSrc: require('@/assets/img/img__sample.jpg'),
+              width: '450',
+              height: '1000',
+              imgName: '이미지 파일명',
+            },
+          ],
+          calculateImg: {
+            imgSrc: require('@/assets/img/img__sample.jpg'),
+            width: '450',
+            height: '1000',
+            imgName: '이미지 파일명',
+          },
+          dltCnctnImg: {
+            imgSrc: require('@/assets/img/img__sample.jpg'),
+            width: '450',
+            height: '1000',
+            imgName: '이미지 파일명',
+          },
+          frmwrAnmtnImgs: [
+            {
+              id: '01',
+              imgSrc: require('@/assets/img/img__sample.jpg'),
+              width: '450',
+              height: '1000',
+              imgName: '이미지 파일명',
+            },
+          ],
         },
       },
     }
   },
   methods: {
+    deleteDetail() {
+      // 삭제
+    },
+    moveList() {
+      this.$router.push({ name: 'CheeringTtoolMgmt' })
+      // 목록
+    },
+    moveCancel() {
+      // 취소
+      this.$router.push({ name: 'CheeringTtoolMgmt' })
+    },
     changeModifyMode() {
       // 수정
       this.isModify = true
     },
+    saveDetail() {
+      // 저장
+    },
     // 첨부파일
     uplodeFileName() {
       let file = this.$refs.fileUpdate.files[0]
-      this.form.imgInfo.apndFiles.push(file)
+      this.form.imgInfo.mainThumbnail.push(file)
+      this.form.imgInfo.powerBtnImg.push(file)
+      this.form.imgInfo.navigationImg.push(file)
+      this.form.imgInfo.mappingImgs.push(file)
+      this.form.imgInfo.calculateImg.push(file)
+      this.form.imgInfo.dltCnctnImg.push(file)
+      this.form.imgInfo.frmwrAnmtnImgs.push(file)
     },
   },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.CheeringTool {
+  .form__box {
+    padding: 10px;
+    border-top: 1px solid $gray-20;
+    + .form__box {
+      border-top: none;
+    }
+  }
+}
+</style>
