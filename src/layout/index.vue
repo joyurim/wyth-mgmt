@@ -8,7 +8,7 @@
           <li><router-link to="/">콘서트</router-link></li>
           <li><router-link to="/">리스트</router-link></li>
         </ul>
-        <div>
+        <div class="layout__name">
           <span class="point-color">홍길동</span>님 안녕하세요.
           <button type="button" class="btn__logout"></button>
         </div>

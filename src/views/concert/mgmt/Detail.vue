@@ -31,38 +31,35 @@
         </div>
       </div>
       <!-- 콘서트 명 -->
-      <div class="flex flex-col mt-2">
-        <!-- 콘서트명 -->
-        <div class="flex items-center">
-          <label
-            class="form__label"
-            :class="{
-              'form__label--required': mode === 'create' || mode === 'modify',
-            }"
-            >콘서트 명</label
-          >
-          <div class="flex-1">
-            <input
-              v-model="form.concertNm"
-              type="text"
-              class="form__input"
-              maxlength="50"
-              :readonly="mode === 'read'"
-            />
-          </div>
+      <div class="flex items-center mt-2">
+        <label
+          class="form__label"
+          :class="{
+            'form__label--required': mode === 'create' || mode === 'modify',
+          }"
+          >콘서트 명</label
+        >
+        <div class="flex-1">
+          <input
+            v-model="form.concertNm"
+            type="text"
+            class="form__input"
+            maxlength="50"
+            :readonly="mode === 'read'"
+          />
         </div>
-        <!-- 콘서트 영문명 -->
-        <div class="flex items-center mt-2">
-          <label class="form__label">콘서트 영문명</label>
-          <div class="flex-1">
-            <input
-              v-model="form.concertEngNm"
-              type="text"
-              class="form__input"
-              maxlength="50"
-              :readonly="mode === 'read'"
-            />
-          </div>
+      </div>
+      <!-- 콘서트 영문명 -->
+      <div class="flex items-center mt-2">
+        <label class="form__label">콘서트 영문명</label>
+        <div class="flex-1">
+          <input
+            v-model="form.concertNmEng"
+            type="text"
+            class="form__input"
+            maxlength="50"
+            :readonly="mode === 'read'"
+          />
         </div>
       </div>
       <!-- 아티스트 명  -->
@@ -201,38 +198,35 @@
         </div>
       </div>
       <!-- 공연장 명 -->
-      <div class="flex flex-col mt-2">
-        <!-- 공연장 명 -->
-        <div class="flex items-center">
-          <label
-            class="form__label"
-            :class="{
-              'form__label--required': mode === 'create' || mode === 'modify',
-            }"
-            >공연장 명</label
-          >
-          <div class="flex-1">
-            <input
-              v-model="form.concertHall"
-              type="text"
-              class="form__input"
-              maxlength="50"
-              :readonly="mode === 'read'"
-            />
-          </div>
+      <div class="flex items-center mt-2">
+        <label
+          class="form__label"
+          :class="{
+            'form__label--required': mode === 'create' || mode === 'modify',
+          }"
+          >공연장 명</label
+        >
+        <div class="flex-1">
+          <input
+            v-model="form.concertHall"
+            type="text"
+            class="form__input"
+            maxlength="50"
+            :readonly="mode === 'read'"
+          />
         </div>
-        <!-- 공연장 영문명 -->
-        <div class="flex items-center mt-2">
-          <label class="form__label">공연장 영문명</label>
-          <div class="flex-1">
-            <input
-              v-model="form.concertHallEng"
-              type="text"
-              class="form__input"
-              maxlength="50"
-              :readonly="mode === 'read'"
-            />
-          </div>
+      </div>
+      <!-- 공연장 영문명 -->
+      <div class="flex items-center mt-2">
+        <label class="form__label">공연장 영문명</label>
+        <div class="flex-1">
+          <input
+            v-model="form.concertHallEng"
+            type="text"
+            class="form__input"
+            maxlength="50"
+            :readonly="mode === 'read'"
+          />
         </div>
       </div>
       <!-- 노출여부 -->
@@ -436,7 +430,7 @@ export default {
         id: '',
         mgmtId: '',
         concertNm: '',
-        concertEngNm: '',
+        concertNmEng: '',
         artistList: [
           {
             artist: '',
