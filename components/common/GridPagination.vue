@@ -3,34 +3,33 @@
     <div v-if="totalCount > limit" class="w-40 pagi__select">
       <v-select
         v-model="limit"
-        label="codeNm"
         :options="limitList"
+        label="codeNm"
         :reduce="(limit) => limit.codeVal"
         :searchable="false"
         @input="changePage(0)"
       />
     </div>
-    <client-only>
-      <vue-ads-pagination
-        :total-items="totalCount"
-        :page="currentPage"
-        :items-per-page="Number(limit)"
-      >
-        <template slot-scope="props">
-          <div class="hidden">{{ props }}</div>
-        </template>
 
-        <template slot="buttons" slot-scope="props">
-          <vue-ads-page-button
-            v-for="(button, key) in props.buttons"
-            :key="key"
-            class="btn--pagination my-2"
-            v-bind="button"
-            @page-change="changePage(button.page)"
-          />
-        </template>
-      </vue-ads-pagination>
-    </client-only>
+    <vue-ads-pagination
+      :total-items="totalCount"
+      :page="currentPage"
+      :items-per-page="Number(limit)"
+    >
+      <template slot-scope="props">
+        <div class="hidden">{{ props }}</div>
+      </template>
+
+      <template slot="buttons" slot-scope="props">
+        <vue-ads-page-button
+          v-for="(button, key) in props.buttons"
+          :key="key"
+          class="btn--pagination my-2"
+          v-bind="button"
+          @page-change="changePage(button.page)"
+        />
+      </template>
+    </vue-ads-pagination>
   </div>
 </template>
 
@@ -149,8 +148,8 @@ export default {
           display: inline-block;
           width: 9px;
           height: 9px;
-          background: url('assets/img/icon__arrow-left.png') no-repeat center
-            center / 9px;
+          background: url('@/assets/img/icon__arrow-left.png') no-repeat center
+          center / 9px;
           transform: rotate(180deg);
         }
       }
@@ -160,8 +159,8 @@ export default {
           display: inline-block;
           width: 9px;
           height: 9px;
-          background: url('assets/img/icon__arrow-left.png') no-repeat center
-            center / 9px;
+          background: url('@/assets/img/icon__arrow-left.png') no-repeat center
+          center / 9px;
         }
       }
       > i.fa-angle-double-right {
@@ -170,8 +169,8 @@ export default {
           display: inline-block;
           width: 9px;
           height: 9px;
-          background: url('assets/img/icon__arrow-double-left.png') no-repeat
-            center center / 9px;
+          background: url('@/assets/img/icon__arrow-double-left.png') no-repeat
+          center center / 9px;
           transform: rotate(180deg);
         }
       }
@@ -181,8 +180,8 @@ export default {
           display: inline-block;
           width: 9px;
           height: 9px;
-          background: url('assets/img/icon__arrow-double-left.png') no-repeat
-            center center / 9px;
+          background: url('@/assets/img/icon__arrow-double-left.png') no-repeat
+          center center / 9px;
         }
       }
     }

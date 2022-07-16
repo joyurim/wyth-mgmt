@@ -1,9 +1,9 @@
 <template>
   <nav class="flex flex-col sidebar">
     <h1 class="logo mb-8">
-      <NuxtLink to="/concert/mgmt">
+      <nuxt-link to="/concert/mgmt">
         <img src="@/assets/img/logo.png" alt="SM Ent 관리자" />
-      </NuxtLink>
+      </nuxt-link>
     </h1>
     <ul class="sidebar__wrap">
       <li
@@ -18,8 +18,8 @@
             :key="`sidebar-sub-menu-${subMenu.menuId}`"
             class="submenu"
           >
-            <NuxtLink :to="subMenu.menuUrl" class="menu">
-              {{ subMenu.menuName }}</NuxtLink
+            <nuxt-link :to="subMenu.menuUrl" class="menu">
+              {{ subMenu.menuName }}</nuxt-link
             >
           </li>
         </ul>
@@ -153,7 +153,7 @@ export default {
           color: $primary-2;
         }
       }
-      .router-link-exact-active {
+      .nuxt-link-exact-active {
         color: $primary-1;
         font-weight: 500;
       }
@@ -167,7 +167,7 @@ export default {
       width: 16px;
       height: 16px;
       margin-right: 5px;
-      background: url(assets/img/icon__logout.png) no-repeat center center /
+      background: url(@/assets/img/icon__logout.png) no-repeat center center /
         100%;
       vertical-align: sub;
       &:focus {
