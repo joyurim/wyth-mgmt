@@ -609,13 +609,5 @@ export default {
   .form__label {
     width: 100%;
   }
-  tfoot {
-    tr {
-      th,
-      td {
-        font-weight: 500;
-      }
-    }
-  }
 }
 </style>
