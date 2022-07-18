@@ -144,7 +144,7 @@
                   <button
                     type="button"
                     class="btn__secondary-line--sm"
-                    @click="detail"
+                    @click="goToDetail"
                   >
                     상세
                   </button>
@@ -436,7 +436,7 @@ export default {
       }
       this.$router.push(routeObject)
     },
-    detail() {
+    goToDetail() {
       // 상세조회
       this.$router.push({ name: 'ConcertMgmtDetail', params: { mode: 'read' } })
     },

@@ -1,5 +1,5 @@
 <template>
-  <section aria-label="좌석 관리 조회 화면">
+  <section aria-label="콘서트 좌석 매핑 통계 리스트">
     <article aria-label="검색 영역" class="search-form">
       <!-- 공연,아티스트 선택 -->
       <div class="w-28 mr-1">
@@ -20,13 +20,26 @@
           class="form__input"
         />
       </div>
-      <!-- 노출여부 -->
-      <div class="flex items-center mr-4">
-        <label class="search-form__label">회차 노출여부</label>
+
+      <!-- 상태 -->
+      <div class="flex items-center ml-7 mr-4">
+        <label class="search-form__label">상태</label>
         <div class="w-24">
           <v-select
-            v-model="search.roundExposureYn"
-            :options="search.roundExposureYnList"
+            v-model="search.status"
+            :options="search.statusList"
+            label="name"
+            :searchable="false"
+          />
+        </div>
+      </div>
+      <!-- 노출여부 -->
+      <div class="flex items-center mr-4">
+        <label class="search-form__label">노출여부</label>
+        <div class="w-24">
+          <v-select
+            v-model="search.exposureYn"
+            :options="search.exposureYnList"
             label="name"
             :searchable="false"
           />
@@ -77,75 +90,51 @@
         <table class="grid__base">
           <colgroup>
             <col width="5%" />
+            <col width="20%" />
             <col width="16%" />
-            <col width="9%" />
-            <col width="4%" />
-            <col width="9%" />
-            <col width="11%" />
-            <col width="4%" />
-            <col width="6%" />
-            <col width="5%" />
-            <col width="7%" />
-            <col width="10%" />
-            <col width="6%" />
             <col width="8%" />
+            <col width="8%" />
+            <col width="6%" />
+            <col width="15%" />
+            <col width="5%" />
+            <col width="5%" />
+            <col width="12%" />
           </colgroup>
           <thead>
             <tr>
               <th>콘서트<br />ID</th>
               <th>콘서트 명</th>
               <th>아티스트</th>
+              <th>콘서트<br />시작일</th>
+              <th>콘서트<br />종료일</th>
               <th>회차</th>
-              <th>공연일</th>
               <th>공연장</th>
+              <th>상태</th>
               <th>노출여부</th>
-              <th>회차 노출여부</th>
-              <th>좌석수</th>
-              <th>좌석명</th>
-              <th>좌석명(영문)</th>
-              <th>보기</th>
-              <th>좌석등록</th>
+              <th>등록일시</th>
             </tr>
           </thead>
           <tbody>
             <template v-if="grid.page.totalCount > 0">
               <tr
-                v-for="s in grid.seatInfoList"
-                :key="`seat-info-list-${s.id}`"
+                v-for="c in grid.concertList"
+                :key="`concert-mgmt-list-${c.id}`"
+                @dblclick="goToDetail()"
               >
-                <td>{{ s.id }}</td>
-                <td class="truncate">{{ s.concretNm }}</td>
-                <td class="truncate">{{ s.artist }}</td>
-                <td>{{ s.round }}</td>
-                <td>{{ s.concretDate }}</td>
-                <td>{{ s.concertHall }}</td>
-                <td>{{ s.exposureYn }}</td>
-                <td>{{ s.roundExposureYn }}</td>
-                <td>{{ s.seatsNum }}</td>
-                <td>{{ s.seatsNm }}</td>
-                <td>{{ s.seatsNmEng }}</td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn__secondary-line--sm"
-                    @click="goToDetail"
-                  >
-                    상세
-                  </button>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn__primary-line--sm"
-                    @click="addSeat"
-                  >
-                    등록/재등록
-                  </button>
-                </td>
+                <td>{{ c.id }}</td>
+                <td class="truncate">{{ c.concretNm }}</td>
+                <td class="truncate">{{ c.artist }}</td>
+                <td>{{ c.startDate }}</td>
+                <td>{{ c.endDate }}</td>
+                <td>{{ c.round }}</td>
+                <td>{{ c.concertHall }}</td>
+                <td>{{ c.status }}</td>
+                <td>{{ c.exposureYn }}</td>
+                <td>{{ c.rgstrDate }}</td>
               </tr>
             </template>
             <tr class="no-data" v-if="grid.page.totalCount === 0">
-              <td colspan="13">검색된 결과가 없습니다.</td>
+              <td colspan="10">검색된 결과가 없습니다.</td>
             </tr>
           </tbody>
         </table>
@@ -162,11 +151,10 @@
 </template>
 
 <script>
-import datePicker from 'vue2-datepicker'
 import GridPagination from '@/components/common/GridPagination'
-
+import datePicker from 'vue2-datepicker'
 export default {
-  name: 'SeatInfo',
+  name: 'ConcertSeatMapping',
   components: {
     GridPagination,
     datePicker,
@@ -190,11 +178,31 @@ export default {
             code: 'artist',
           },
         ],
-        // 콘서트 명
+        // 콘서트명
         concertNm: '',
+        // 상태
+        status: '전체',
+        statusList: [
+          {
+            name: '전체',
+            code: 'statusAll',
+          },
+          {
+            name: '예정',
+            code: 'schedule',
+          },
+          {
+            name: '진행중',
+            code: 'ongoing',
+          },
+          {
+            name: '종료',
+            code: 'end',
+          },
+        ],
         // 노출여부
-        roundExposureYn: '전체',
-        roundExposureYnList: [
+        exposureYn: '전체',
+        exposureYnList: [
           {
             name: '전체',
             code: 'exposureYnAll',
@@ -243,123 +251,126 @@ export default {
         },
       },
       grid: {
-        seatInfoList: [
+        concertList: [
           {
             id: '20',
             concretNm: 'SMTOWN LIVE CONCERT in Seou',
             artist: 'SM TOWN',
+            startDate: '2021-03-14',
+            endDate: '2021-03-14',
             round: '1',
-            concretDate: '2022-01-17 19:00',
             concertHall: '올림픽 체조경기장',
-            exposureYn: '노출',
-            roundExposureYn: '노출',
-            seatsNum: '12,800',
-            seatsNm: '층,구역,열,번호',
-            seatsNmEng: 'Floor,Zone,Row,Col',
+            status: '예정',
+            exposureYn: '비노출',
+            rgstrDate: '2021-03-01 15:01:47',
           },
           {
             id: '19',
-            concretNm: 'SMTOWN LIVE CONCERT in Seou',
-            artist: 'SM TOWN',
-            round: '2',
-            concretDate: '2022-01-18 19:00',
+            concretNm: '동방신기 새앨범 판매콘서트',
+            artist: '동방신기',
+            startDate: '2021-02-14',
+            endDate: '2021-02.16',
+            round: '6',
             concertHall: '올림픽 체조경기장',
+            status: '예정',
             exposureYn: '비노출',
-            roundExposureYn: '노출',
-            seatsNum: '-',
-            seatsNm: '-',
-            seatsNmEng: '-',
+            rgstrDate: '2021-02-01 15:01:47',
           },
           {
             id: '18',
-            concretNm: 'SMTOWN LIVE CONCERT in Seou',
-            artist: 'SM TOWN',
+            concretNm: 'Red Velvet SPECIAL LIVE [2022 The ReVe Festival]',
+            artist: '레드벨벳',
+            startDate: '2021-02-01',
+            endDate: '2021-02-02',
             round: '3',
-            concretDate: '2022-01-19 19:00',
-            concertHall: '올림픽 체조경기장',
-            exposureYn: '비노출',
-            roundExposureYn: '노출',
-            seatsNum: '-',
-            seatsNm: '-',
-            seatsNmEng: '-',
+            concertHall: '올림픽공원 올림픽홀',
+            status: '예정',
+            exposureYn: '노출',
+            rgstrDate: '2021-02-01 15:01:47',
           },
           {
             id: '17',
-            concretNm: 'NCT 127 2ND TOUR NEO CITY : SEOUL',
-            artist: 'NCT 127',
-            round: '1',
-            concretDate: '2021-12-17 19:00',
-            concertHall: '고척스카이돔',
+            concretNm: 'EXO PLANET#5 - EXplOration',
+            artist: 'EXO',
+            startDate: '2021-01-31',
+            endDate: '2021-02-01',
+            round: '4',
+            concertHall: '고척 스카이돔',
+            status: '진행중',
             exposureYn: '노출',
-            roundExposureYn: '노출',
-            seatsNum: '12,800',
-            seatsNm: '층,구역,열,번호',
-            seatsNmEng: 'Floor,Zone,Row,Col',
+            rgstrDate: '2021-01-01 15:01:47',
           },
           {
             id: '16',
-            concretNm: 'NCT 127 2ND TOUR NEO CITY : SEOUL',
-            artist: 'NCT 127',
-            round: '3',
-            concretDate: '2021-12-18 18:00',
-            concertHall: '고척스카이돔',
-            exposureYn: '비노출',
-            roundExposureYn: '노출',
-            seatsNum: '-',
-            seatsNm: '-',
-            seatsNmEng: '-',
+            concretNm: 'BoA THE LIVE 2018 in SEOUL',
+            artist: 'BoA',
+            startDate: '2021-01-01',
+            endDate: '2021-01-01',
+            round: '1',
+            concertHall: '세종문화회관',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2021-01-01 15:01:47',
           },
           {
             id: '15',
-            concretNm: 'NCT 127 2ND TOUR NEO CITY : SEOUL',
-            artist: 'NCT 127',
+            concretNm: 'TAEYEON SPECIAL LIVE ',
+            artist: '태연',
+            startDate: '2020-12-22',
+            endDate: '2020-12-24',
             round: '3',
-            concretDate: '2021-12-19 17:00',
-            concertHall: '고척스카이돔',
-            exposureYn: '비노출',
-            roundExposureYn: '노출',
-            seatsNum: '-',
-            seatsNm: '-',
-            seatsNmEng: '-',
+            concertHall: '경희대학교 평화의전당',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2020-12-01 15:01:47',
           },
           {
             id: '14',
-            concretNm: '동방신기 새앨범 판매콘서트',
-            artist: '동방신기',
-            round: '1',
-            concretDate: '2021-02-22 15:00',
-            concertHall: '올림픽 체조경기장',
+            concretNm: '[THE AGIT] Love, Still – Seohyun',
+            artist: '서현',
+            startDate: '2020-04-08',
+            endDate: '2020-04-09',
+            round: '2',
+            concertHall: '코엑스 아티움 SMTOWN',
+            status: '종료',
             exposureYn: '노출',
-            roundExposureYn: '노출',
-            seatsNum: '12,800',
-            seatsNm: '층,구역,열,번호',
-            seatsNmEng: 'Floor,Zone,Row,Col',
+            rgstrDate: '2020-04-01 15:01:47',
+          },
+          {
+            id: '13',
+            concretNm: 'SHINee SPECIAL PARTY - THE SHINING',
+            artist: '샤이니',
+            startDate: '2020-03-01',
+            endDate: '2020-03-02',
+            round: '2',
+            concertHall: 'KSPO DOME (올림픽체조경기장)',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2021-02-20 15:01:47',
           },
           {
             id: '12',
-            concretNm: 'Red Velvet SPECIAL LIVE [2022 The ReVe Festival]',
-            artist: '레드벨벳',
-            round: '1',
-            concretDate: '2021-01-01 15:00',
-            concertHall: '올림픽공원 올림픽홀',
-            exposureYn: '비노출',
-            roundExposureYn: '노출',
-            seatsNum: '-',
-            seatsNm: '-',
-            seatsNmEng: '-',
+            concretNm: 'TAEYEON Concert - The UNSEEN',
+            artist: '태연',
+            startDate: '2020.01.17',
+            endDate: '2020.01.19',
+            round: '4',
+            concertHall: '올림픽공원 SK올림픽핸드볼경기장',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2020-01-01 15:01:47',
           },
           {
             id: '11',
-            concretNm: 'Red Velvet SPECIAL LIVE [2022 The ReVe Festival]',
+            concretNm: '2019 CHANGWON K-POP WORLD FESTIVAL',
             artist: '레드벨벳',
-            round: '2',
-            concretDate: '2021-01-01 20:00',
-            concertHall: '올림픽공원 올림픽홀',
-            exposureYn: '비노출',
-            roundExposureYn: '노출',
-            seatsNum: '-',
-            seatsNm: '-',
-            seatsNmEng: '-',
+            startDate: '2019.10.11',
+            endDate: '2019.10.11',
+            round: '1',
+            concertHall: '창원스포츠파크주경기장',
+            status: '종료',
+            exposureYn: '노출',
+            rgstrDate: '2021-01-01 15:01:47',
           },
         ],
         page: {
@@ -394,22 +405,15 @@ export default {
     inquiry() {
       // 조회
     },
-    addSeat() {
-      // 등록,재등록
-      const routeObject = {
-        name: 'SeatInfoAdd',
-        params: {
-          mode: 'create',
-        },
-      }
-      this.$router.push(routeObject)
-    },
     goToDetail() {
       // 상세조회
-      this.$router.push({ name: 'SeatInfoDetail', params: { mode: 'read' } })
-    },
-    delete() {
-      // 삭제
+      let router = {
+        name: 'ConcertSeatMappingDetail',
+        params: {
+          id: '1234',
+        },
+      }
+      this.$router.push(router)
     },
     changePage(page) {
       // 페이지네이션

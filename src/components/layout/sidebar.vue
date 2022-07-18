@@ -73,8 +73,8 @@ export default {
           subMenuList: [
             {
               menuId: 'menu3-1',
-              menuName: '공연별 통계',
-              menuUrl: '/statistics/show',
+              menuName: '콘서트 좌석 매핑',
+              menuUrl: '/statistics/concert-seat',
             },
             {
               menuId: 'menu3-2',

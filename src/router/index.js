@@ -87,12 +87,21 @@ const routes = [
           ),
       },
       {
-        // 공연별 통계
-        path: '/statistics/show',
-        name: 'ShowStatistics',
+        // 콘서트 좌석 매핑
+        path: '/statistics/concert-seat',
+        name: 'ConcertSeatMapping',
         component: () =>
           import(
-            /* webpackChunkName: "statistics" */ '@/views/statistics/show'
+            /* webpackChunkName: "statistics" */ '@/views/statistics/concert-seat'
+          ),
+      },
+      {
+        // 콘서트 좌석 매핑 상세
+        path: '/statistics/concert-seat/detail:id',
+        name: 'ConcertSeatMappingDetail',
+        component: () =>
+          import(
+            /* webpackChunkName: "statistics" */ '@/views/statistics/concert-seat/Detail.vue'
           ),
       },
       {
