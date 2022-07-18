@@ -52,12 +52,11 @@
           <colgroup>
             <col width="8%" />
             <col width="19%" />
-            <col width="15%" />
-            <col width="15%" />
-            <col width="15%" />
+            <col width="18%" />
+            <col width="18%" />
+            <col width="17%" />
             <col width="10%" />
             <col width="10%" />
-            <col width="8%" />
           </colgroup>
           <thead>
             <tr>
@@ -68,7 +67,6 @@
               <th>모델명</th>
               <th>펌웨어 업데이트</th>
               <th>노출여부</th>
-              <th>보기</th>
             </tr>
           </thead>
           <tbody>
@@ -76,6 +74,7 @@
               <tr
                 v-for="c in grid.cheeringToolList"
                 :key="`cheering-tool-list-${c.id}`"
+                @dblclick="goToDetail()"
               >
                 <td>{{ c.toolId }}</td>
                 <td>{{ c.toolNm }}</td>
@@ -84,15 +83,6 @@
                 <td>{{ c.modelNm }}</td>
                 <td>{{ c.firmware }}</td>
                 <td>{{ c.exposureYn }}</td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn__secondary-line--sm"
-                    @click="detail"
-                  >
-                    상세
-                  </button>
-                </td>
               </tr>
             </template>
             <tr class="no-data" v-if="grid.page.totalCount === 0">
@@ -189,12 +179,15 @@ export default {
       }
       this.$router.push(routeObject)
     },
-    detail() {
+    goToDetail() {
       // 상세조회
-      this.$router.push({
+      let router = {
         name: 'CheeringToolDetail',
-        params: { mode: 'read' },
-      })
+        params: {
+          id: '1234',
+        },
+      }
+      this.$router.push(router)
     },
     changePage(page) {
       // 페이지네이션

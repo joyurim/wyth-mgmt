@@ -38,11 +38,10 @@
         <table class="grid__base">
           <colgroup>
             <col width="10%" />
-            <col width="15%" />
-            <col width="15%" />
-            <col width="15%" />
-            <col width="15%" />
-            <col width="10%" />
+            <col width="17%" />
+            <col width="18%" />
+            <col width="18%" />
+            <col width="17%" />
             <col width="10%" />
             <col width="10%" />
           </colgroup>
@@ -51,11 +50,10 @@
               <th>응원도구 ID</th>
               <th>응원도구 이름</th>
               <th>연동 프로토콜</th>
-              <th>디바이스 이름</th>
-              <th>모델명</th>
+              <th>Stick BLE Name</th>
+              <th>Stick Model</th>
               <th>펌웨어<br />업데이트</th>
               <th>노출여부</th>
-              <th>선택</th>
             </tr>
           </thead>
           <tbody>
@@ -65,21 +63,16 @@
                 :key="`concert-mgmt-detail-popup-${c.id}`"
               >
                 <td>{{ c.cheeringId }}</td>
-                <td>{{ c.protocol }}</td>
                 <td>{{ c.cheeringNm }}</td>
-                <td>{{ c.deviceNm }}</td>
-                <td>{{ c.modelNm }}</td>
+                <td>{{ c.protocol }}</td>
+                <td>{{ c.stickBleNm }}</td>
+                <td>{{ c.stickModel }}</td>
                 <td>{{ c.firmware }}</td>
                 <td>{{ c.exposureYn }}</td>
-                <td>
-                  <div class="form__radio justify-center">
-                    <input v-model="c.select" type="radio" value="Y" />
-                  </div>
-                </td>
               </tr>
             </template>
             <tr class="no-data" v-if="grid.page.totalCount === 0">
-              <td colspan="4">검색된 결과가 없습니다.</td>
+              <td colspan="7">검색된 결과가 없습니다.</td>
             </tr>
           </tbody>
         </table>
@@ -118,8 +111,8 @@ export default {
           '전체',
           '응원도구 ID',
           '응원도구 이름',
-          '디바이스 이름',
-          '모델명',
+          'Stick BLE',
+          'Stick Model',
         ],
         keyword: '',
       },
@@ -129,11 +122,10 @@ export default {
             cheeringId: '20',
             cheeringNm: '엑소봉 Ver.3',
             protocol: 'BEATRO_V1',
-            deviceNm: 'EXO_FANLIGHT',
-            modelNm: 'SME-EXO-OFL03',
+            stickBleNm: 'EXO_FANLIGHT',
+            stickModel: 'SME-EXO-OFL03',
             firmware: 'Y',
             exposureYn: '노출',
-            select: 'Y',
           },
         ],
         page: {

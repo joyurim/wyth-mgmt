@@ -47,10 +47,9 @@
           <colgroup>
             <col width="15%" />
             <col width="30%" />
-            <col width="15%" />
-            <col width="15%" />
-            <col width="15%" />
-            <col width="10%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="20%" />
           </colgroup>
           <thead>
             <tr>
@@ -59,30 +58,24 @@
               <th>데뷔일</th>
               <th>타입</th>
               <th>노출여부</th>
-              <th>보기</th>
             </tr>
           </thead>
           <tbody>
             <template v-if="grid.page.totalCount > 0">
-              <tr v-for="a in grid.artistList" :key="`artist-list-${a.id}`">
+              <tr
+                v-for="a in grid.artistList"
+                :key="`artist-list-${a.id}`"
+                @dblclick="goToDetail()"
+              >
                 <td>{{ a.artistId }}</td>
                 <td>{{ a.artistNm }}</td>
                 <td>{{ a.debutDate }}</td>
                 <td>{{ a.debutType }}</td>
                 <td>{{ a.exposureYn }}</td>
-                <td>
-                  <button
-                    type="button"
-                    class="btn__secondary-line--sm"
-                    @click="detail"
-                  >
-                    상세
-                  </button>
-                </td>
               </tr>
             </template>
             <tr class="no-data" v-if="grid.page.totalCount === 0">
-              <td colspan="6">검색된 결과가 없습니다.</td>
+              <td colspan="5">검색된 결과가 없습니다.</td>
             </tr>
           </tbody>
         </table>
@@ -163,9 +156,19 @@ export default {
     inquiry() {
       // 조회
     },
-    detail() {
-      // 상세조회
-      this.$router.push({ name: 'ArtistMgmtDetail', params: { mode: 'read' } })
+    // detail() {
+    //   // 상세조회
+    //   this.$router.push({ name: 'ArtistMgmtDetail', params: { mode: 'read' } })
+    // },
+    // 상세 페이지로 이동
+    goToDetail() {
+      let router = {
+        name: 'ArtistMgmtDetail',
+        params: {
+          id: '1234',
+        },
+      }
+      this.$router.push(router)
     },
     changePage(page) {
       // 페이지네이션

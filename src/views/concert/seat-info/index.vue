@@ -77,7 +77,7 @@
         <table class="grid__base">
           <colgroup>
             <col width="5%" />
-            <col width="17%" />
+            <col width="16%" />
             <col width="9%" />
             <col width="4%" />
             <col width="9%" />
@@ -88,7 +88,7 @@
             <col width="7%" />
             <col width="10%" />
             <col width="6%" />
-            <col width="7%" />
+            <col width="8%" />
           </colgroup>
           <thead>
             <tr>

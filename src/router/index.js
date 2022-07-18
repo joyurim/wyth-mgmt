@@ -61,7 +61,7 @@ const routes = [
       },
       {
         // 아티스트 관리 상세
-        path: '/basic-info/artist/detail',
+        path: '/basic-info/artist/detail/:id',
         name: 'ArtistMgmtDetail',
         component: () =>
           import(
@@ -79,7 +79,7 @@ const routes = [
       },
       {
         // 응원도구 관리 상세
-        path: '/basic-info/cheering-tool/detail',
+        path: '/basic-info/cheering-tool/detail:id',
         name: 'CheeringToolDetail',
         component: () =>
           import(
