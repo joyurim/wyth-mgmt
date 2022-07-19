@@ -265,10 +265,15 @@
 
     <!--  팝업 -->
     <GroupCodeDetailPopup
-      v-if="popup.groupCode"
+      v-if="popup.groupCode.view"
+      :mode="popup.groupCode.mode"
       @closePopup="closedGroupCodeDetailPopup"
     />
-    <CodeDetailPopup v-if="popup.code" @closePopup="closedCodeDetailPopup" />
+    <CodeDetailPopup
+      v-if="popup.code.view"
+      :mode="popup.groupCode.mode"
+      @closePopup="closedCodeDetailPopup"
+    />
   </section>
 </template>
 
@@ -340,8 +345,14 @@ export default {
         },
       },
       popup: {
-        groupCode: false,
-        code: false,
+        groupCode: {
+          view: false,
+          mode: '',
+        },
+        code: {
+          view: false,
+          mode: '',
+        },
       },
     }
   },
@@ -352,10 +363,10 @@ export default {
     },
     openGroupCodeDetail() {
       // 그룹코드 등록 팝업 오픈
-      this.popup.groupCode = true
+      this.popup.groupCode.view = true
     },
     closedGroupCodeDetailPopup() {
-      this.popup.groupCode = false
+      this.popup.groupCode.view = false
     },
     modifyGroupCodeDetail() {
       // 그룹코드 수정 팝업 오픈
@@ -374,10 +385,10 @@ export default {
     },
     openCodeDetail() {
       // 코드 등록 팝업 오픈
-      this.popup.code = true
+      this.popup.code.view = true
     },
     closedCodeDetailPopup() {
-      this.popup.code = false
+      this.popup.code.view = false
     },
     modifyCodeDetail() {
       // 코드 수정 팝업 오픈
