@@ -68,7 +68,7 @@
       </div>
       <button class="btn__search" @click="inquiry">검색</button>
     </article>
-    <article class="grid mt-6">
+    <article aria-label="리스트 영역" class="grid mt-6">
       <label class="form__label font-medium">펌웨어 업데이트 통계</label>
       <div class="grid__wrap">
         <table class="grid__base">
@@ -125,7 +125,7 @@
       </div>
     </article>
     <!-- 콘서트 통계 -->
-    <article class="grid mt-8">
+    <article aria-label="리스트 영역" class="grid mt-8">
       <!-- 리스트 카운트 -->
       <div class="grid__countbox">
         <div class="grid__count">

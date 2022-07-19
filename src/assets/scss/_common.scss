@@ -25,6 +25,12 @@
   .point-color {
     color: $primary-1;
   }
+  .link-style {
+    width: initial;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
   // 웹 접근성을 위해 글자 숨김
   .hide {
     overflow: hidden;
@@ -859,6 +865,9 @@ p.form__error {
             word-wrap: normal;
           }
 
+          &.link-style {
+            color: $primary-1;
+          }
           &.link-style,
           &.cursor-pointer {
             cursor: pointer;
@@ -871,6 +880,9 @@ p.form__error {
             color: $gray-40;
             background: $primary-3;
             cursor: default;
+            &.link-style {
+              color: $primary-2;
+            }
           }
         }
 

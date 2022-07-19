@@ -14,7 +14,7 @@
         <input v-model="search.searchword" type="text" class="form__input" />
       </div>
       <!-- 노출여부 -->
-      <div class="flex items-center mr-1">
+      <div class="flex items-center">
         <label class="search-form__label">사용여부</label>
         <div class="w-24">
           <v-select
