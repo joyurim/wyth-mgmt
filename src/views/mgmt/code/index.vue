@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO : 팝업 모드별로 다르게 보이도록 개발 작업 필요 -->
   <section aria-label="공통코드 관리" class="flex items-start">
     <section aria-label="그룹코드 영역" class="flex-1 mr-2 group-code">
       <article aria-label="검색 영역" class="search-form">
