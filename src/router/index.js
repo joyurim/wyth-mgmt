@@ -121,6 +121,15 @@ const routes = [
           import(/* webpackChunkName: "mgmt" */ '@/views/mgmt/manager'),
       },
       {
+        // 관리자 관리
+        path: '/mgmt/manager/detail:id',
+        name: 'ManagerMgmtDetail',
+        component: () =>
+          import(
+            /* webpackChunkName: "mgmt" */ '@/views/mgmt/manager/Detail.vue'
+          ),
+      },
+      {
         // 코드 관리
         path: '/mgmt/code',
         name: 'CodeMgmt',
