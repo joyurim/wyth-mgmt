@@ -217,7 +217,7 @@
       <div class="flex-1 flex">
         <div class="flex items-bottom mr-4">
           <img
-            class="form__file--img mr-2"
+            class="form__file--img mr-4"
             :src="form.imgInfo.mainThumbnail.imgSrc"
             alt=""
           />
@@ -256,7 +256,7 @@
       <div class="flex-1 flex">
         <div class="flex items-bottom mr-4">
           <img
-            class="form__file--img mr-2"
+            class="form__file--img mr-4"
             :src="form.imgInfo.powerBtnImg.imgSrc"
             alt=""
           />
@@ -294,8 +294,9 @@
       <!-- 업로드 된 파일 -->
       <div class="flex-1 flex">
         <div class="flex items-bottom mr-4">
+          <div class="CheeringTool__id">1</div>
           <img
-            class="form__file--img mr-2"
+            class="form__file--img mr-4"
             :src="form.imgInfo.navImg.imgSrc"
             alt=""
           />
@@ -330,11 +331,7 @@
     <!-- 응원도구 좌석매핑 이미지 -->
     <article class="form__box flex items-center">
       <label class="form__label">응원도구 좌석매핑 이미지</label>
-      <div class="flex-1">
-        <div class="text-right">
-          <button type="button" class="btn__primary-line mr-2">추가</button>
-          <button type="button" class="btn__secondary-line">전체 삭제</button>
-        </div>
+      <div class="flex flex-col flex-1 relative">
         <!-- 업로드 된 파일 -->
         <div
           v-for="(mapping, idx) in form.imgInfo.mappingImgs"
@@ -342,8 +339,8 @@
           class="flex-1 flex"
         >
           <div class="flex items-bottom mr-4">
-            <div class="self-center mr-4">{{ mapping.id }}</div>
-            <img class="form__file--img mr-2" :src="mapping.imgSrc" alt="" />
+            <div class="CheeringTool__id">{{ mapping.id }}</div>
+            <img class="form__file--img mr-4" :src="mapping.imgSrc" alt="" />
             <div v-if="mapping" class="self-end">
               <p class="form__infotext">
                 파일 사이즈 : {{ mapping.width }} x
@@ -371,6 +368,10 @@
             />
           </div>
         </div>
+        <div class="btn__group">
+          <button type="button" class="btn__primary-line mr-2">추가</button>
+          <button type="button" class="btn__secondary-line">전체 삭제</button>
+        </div>
       </div>
     </article>
     <!-- 응원도구 좌석매핑 정산완료 후 이미지 -->
@@ -382,7 +383,7 @@
       <div class="flex-1 flex">
         <div class="flex items-bottom mr-4">
           <img
-            class="form__file--img mr-2"
+            class="form__file--img mr-4"
             :src="form.imgInfo.calculateImg.imgSrc"
             alt=""
           />
@@ -421,7 +422,7 @@
       <div class="flex-1 flex">
         <div class="flex items-bottom mr-4">
           <img
-            class="form__file--img mr-2"
+            class="form__file--img mr-4"
             :src="form.imgInfo.dltCnctnImg.imgSrc"
             alt=""
           />
@@ -456,8 +457,8 @@
     <!-- 펌웨어 애니메이션 이미지 -->
     <article class="form__box flex items-center">
       <label class="form__label">펌웨어 애니메이션 이미지</label>
-      <div class="flex-1">
-        <div class="text-right">
+      <div class="flex flex-col flex-1 relative">
+        <div class="btn__group">
           <button type="button" class="btn__primary-line mr-2">추가</button>
           <button type="button" class="btn__secondary-line">전체 삭제</button>
         </div>
@@ -468,8 +469,8 @@
           class="flex-1 flex"
         >
           <div class="flex items-bottom mr-4">
-            <div class="self-center mr-4">{{ frmwrAnmtn.id }}</div>
-            <img class="form__file--img mr-2" :src="frmwrAnmtn.imgSrc" alt="" />
+            <div class="CheeringTool__id">{{ frmwrAnmtn.id }}</div>
+            <img class="form__file--img mr-4" :src="frmwrAnmtn.imgSrc" alt="" />
             <div v-if="frmwrAnmtn" class="self-end">
               <p class="form__infotext">
                 파일 사이즈 : {{ frmwrAnmtn.width }} x
@@ -652,9 +653,31 @@ export default {
 
 <style lang="scss" scoped>
 .CheeringTool {
+  &__id {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 12px;
+    background: #ffffffdd;
+  }
+
+  .form__label {
+    min-width: 230px;
+  }
+
+  .btn__group {
+    position: absolute;
+    top: -4px;
+    left: 300px;
+  }
+
   .form__box {
     padding: 10px;
     border-top: 1px solid $gray-20;
+
     + .form__box {
       border-top: none;
     }

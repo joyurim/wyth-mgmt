@@ -263,7 +263,7 @@
       <div class="flex-1">
         <div class="flex flex-wrap items-center">
           <!-- 콘서트 회차 -->
-          <div class="flex items-center my-1 pr-8">
+          <div class="flex items-center my-1">
             <label class="form__label">콘서트 회차</label>
             <div class="w-28">
               <v-select
@@ -275,9 +275,9 @@
             </div>
           </div>
           <!-- 응원도구 -->
-          <div class="flex items-center my-1 px-8">
+          <div class="flex items-center my-1 px-4">
             <label class="form__label">응원도구</label>
-            <div class="w-40">
+            <div class="w-28">
               <v-select
                 v-model="form.seatLogInfo.cheeringTool"
                 :options="form.seatLogInfo.cheeringToolList"
@@ -287,9 +287,9 @@
             </div>
           </div>
           <!-- OS -->
-          <div class="flex items-center my-1 px-8">
+          <div class="flex items-center my-1 px-4">
             <label class="form__label">OS</label>
-            <div class="w-32">
+            <div class="w-28">
               <v-select
                 v-model="form.seatLogInfo.os"
                 :options="form.seatLogInfo.osList"
@@ -299,7 +299,7 @@
             </div>
           </div>
           <!-- 언어 -->
-          <div class="flex items-center my-1 pr-8">
+          <div class="flex items-center my-1 pr-4">
             <label class="form__label">언어</label>
             <div class="w-28">
               <v-select
@@ -311,9 +311,9 @@
             </div>
           </div>
           <!-- 연동 실패여부 -->
-          <div class="flex items-center my-1 pl-8">
+          <div class="flex items-center my-1">
             <label class="form__label">연동 실패여부</label>
-            <div class="w-40">
+            <div class="w-28">
               <v-select
                 v-model="form.seatLogInfo.intrwFlnot"
                 :options="form.seatLogInfo.intrwFlnotList"
@@ -325,7 +325,7 @@
         </div>
         <div class="flex items-center mt-2">
           <!-- Floor -->
-          <div class="flex items-center pr-6">
+          <div class="flex items-center">
             <label class="form__label">Floor</label>
             <div class="w-28">
               <v-select
@@ -337,7 +337,7 @@
             </div>
           </div>
           <!-- Zone -->
-          <div class="flex items-center px-6">
+          <div class="flex items-center px-4">
             <label class="form__label">Zone</label>
             <div class="w-28">
               <v-select
@@ -349,7 +349,7 @@
             </div>
           </div>
           <!-- Row -->
-          <div class="flex items-center px-6">
+          <div class="flex items-center px-4">
             <label class="form__label">Row</label>
             <div class="w-28">
               <v-select
@@ -361,7 +361,7 @@
             </div>
           </div>
           <!-- Col -->
-          <div class="flex items-center pr-2">
+          <div class="flex items-center pr-4">
             <label class="form__label">Col</label>
             <div class="w-28">
               <v-select
@@ -374,7 +374,6 @@
           </div>
           <button class="btn__search" @click="inquiry">검색</button>
         </div>
-        <div class="text-right mt-2"></div>
       </div>
     </article>
     <!-- 콘서트 통계 -->
@@ -598,16 +597,33 @@ export default {
 .form__box {
   padding: 10px;
   border-top: 1px solid $gray-20;
+
   &.border-top-none {
     border-top: none;
   }
-  .form__label {
-    min-width: 130px;
+  &.concert-seat {
+    .form__label {
+      padding-right: 10px;
+      min-width: 80px;
+      max-width: 100px;
+      &.font-medium {
+        min-width: 120px;
+      }
+    }
   }
 }
+
 .grid {
   .form__label {
     width: 100%;
+  }
+  &__countbox {
+    .search-form {
+      margin-bottom: 0;
+      > div {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 </style>

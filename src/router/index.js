@@ -10,6 +10,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "Layout" */ '../layout'),
     children: [
       {
+        path: '',
+        name: 'HomeLayout',
+        component: () =>
+          import(/* webpackChunkName: "Layout" */ '@/views/HomeLayout.vue'),
+      },
+      {
         // 콘서트 관리
         path: '/concert/concert-mgmt',
         name: 'ConcertMgmt',

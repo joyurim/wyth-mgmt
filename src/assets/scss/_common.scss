@@ -10,27 +10,33 @@
   // 스크롤 스타일
   scrollbar-width: auto;
   scrollbar-color: #a3a7b9 transparent;
+
   &::-webkit-scrollbar {
     width: 5px;
     height: 7px;
   }
+
   &::-webkit-scrollbar-track {
     background: transparent;
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: #666;
     border-radius: 20px;
     border: 2px solid transparent;
   }
+
   .point-color {
     color: $primary-1;
   }
+
   .link-style {
     width: initial;
     color: blue;
     text-decoration: underline;
     cursor: pointer;
   }
+
   // 웹 접근성을 위해 글자 숨김
   .hide {
     overflow: hidden;
@@ -43,43 +49,57 @@
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
   }
+  img {
+    object-fit: cover;
+  }
 }
-
+#__layout {
+  min-width: 1300px;
+  overflow-x: auto;
+}
 .layout {
   // overflow-y: hidden;
   // height: 100%;
+
   &__top {
     @apply flex-none flex items-end justify-between;
     height: 41px;
     margin: 0 30px 10px;
     border-bottom: 1px solid $gray-20;
     text-align: right;
+
     .point-color {
       font-weight: 500;
     }
+
     .btn__logout {
       width: 16px;
       height: 16px;
       background: url(@/assets/img/icon__logout.png) no-repeat center center /
         100%;
       vertical-align: sub;
+
       &:focus {
         outline: transparent;
       }
     }
   }
+
   &__name {
     line-height: 28px;
   }
+
   > section {
     @apply flex-1;
     overflow-y: auto;
     padding: 0 30px 30px;
   }
+
   .breadcrumb {
     li {
       height: 28px;
       line-height: 28px;
+
       &::after {
         content: '';
         display: inline-block;
@@ -90,15 +110,18 @@
           100%;
         transform: rotate(90deg);
       }
+
       > a {
         display: inline-block;
         color: $gray-50;
         font-size: 11px;
+
         &:hover {
           color: $primary-1;
           border-bottom: 1px solid $primary-1;
         }
       }
+
       &:last-child {
         &::after {
           content: none;
@@ -107,6 +130,7 @@
     }
   }
 }
+
 // 버튼 기본 스타일
 %btn {
   display: inline-block;
@@ -119,23 +143,28 @@
   &:hover {
     box-shadow: 2px 4px 7px 0 rgba(0, 0, 0, 0.2);
   }
+
   &:disabled {
     cursor: not-allowed;
+
     &:hover {
       box-shadow: none;
     }
   }
 }
+
 %btn--lg {
   height: 40px;
   min-width: 80px;
   padding: 0 25px;
 }
+
 %btn--sm {
   height: 26px;
   min-width: 50px;
   padding: 0 10px;
 }
+
 // 버튼별 스타일
 .btn {
   // Primary btn
@@ -146,6 +175,7 @@
 
     &:disabled {
       background: $gray-30;
+
       &:hover {
         background: $gray-30;
       }
@@ -156,6 +186,7 @@
     @extend .btn__primary;
     @extend %btn--lg;
   }
+
   &__primary--sm {
     @extend .btn__primary;
     @extend %btn--sm;
@@ -170,15 +201,18 @@
 
     &:disabled {
       background: $gray-10;
+
       &:hover {
         background: $gray-10;
       }
     }
   }
+
   &__secondary--lg {
     @extend .btn__secondary;
     @extend %btn--lg;
   }
+
   &__secondary--sm {
     @extend .btn__secondary;
     @extend %btn--sm;
@@ -198,10 +232,12 @@
       border: 1px solid $gray-30;
     }
   }
+
   &__primary-line--lg {
     @extend .btn__primary-line;
     @extend %btn--lg;
   }
+
   &__primary-line--sm {
     @extend .btn__primary-line;
     @extend %btn--sm;
@@ -221,10 +257,12 @@
       border: 1px solid $gray-3;
     }
   }
+
   &__secondary-line--lg {
     @extend .btn__secondary-line;
     @extend %btn--lg;
   }
+
   &__secondary-line--sm {
     @extend .btn__secondary-line;
     @extend %btn--sm;
@@ -237,27 +275,33 @@
     height: 30px;
     background: $gray-60;
     color: $white;
+
     &:disabled {
       background: $gray-40;
     }
   }
 }
+
 /* ============= form basic Style ============= */
 // checked + disabled
 %checked--disabled {
   cursor: not-allowed;
+
   + label {
     color: $gray-50;
     cursor: not-allowed;
   }
 }
+
 %checked--readonly {
   cursor: default;
+
   + label {
     color: $gray-60;
     cursor: default;
   }
 }
+
 // input readOnly 스타일
 %form--readonly {
   border: 1px solid $gray-20;
@@ -265,11 +309,14 @@
   color: $gray-60;
 
   cursor: default;
+
   &::placeholder {
     color: $gray-60;
   }
+
   &:focus {
     border: 1px solid $gray-20;
+
     &::placeholder {
       color: $gray-60;
     }
@@ -282,20 +329,24 @@
   background: $gray-2; // 바로 아래 &::placeholder의 background도 동일하게 변경
   border: 1px solid $gray-20;
   color: $gray-50;
+
   &::placeholder {
     background: $gray-2;
     color: $gray-50;
     border: 1px solid transparent;
   }
 }
+
 // input focus 스타일
 %form--focus {
   border: 1px solid $gray-60;
   outline-color: $primary-4;
+
   &::placeholder {
     color: transparent;
   }
 }
+
 // input 상태별 스타일
 %form__state {
   &:focus {
@@ -328,7 +379,8 @@
   &__label {
     align-self: center;
     line-height: 32px;
-    min-width: 180px;
+    min-width: 120px;
+    max-width: 180px;
 
     &--required {
       &::after {
@@ -338,16 +390,19 @@
         color: $error;
       }
     }
+
     &--notHeight {
       line-height: inherit;
     }
   }
+
   &__box {
     // margin-top: 10px;
     // border-top: 1px solid $gray-20;
     border-bottom: 1px solid $gray-20;
     padding: 10px 10px 20px;
   }
+
   // CheckBox Style
   &__checkbox {
     @apply flex items-center;
@@ -384,9 +439,11 @@
           border-left: 2px solid $white;
           border-bottom: 2px solid $white;
         }
+
         &:disabled {
           @extend %checked--disabled;
           border: 1px solid $gray-20;
+
           &::before {
             border-color: $gray-20;
           }
@@ -396,15 +453,18 @@
       &:disabled {
         @extend %checked--disabled;
         background: $gray-2;
+
         &.checkbox--readonly {
           border-color: $gray-20;
           background: transparent;
           cursor: default;
+
           &:checked {
             &:before {
               border-color: $gray-60;
             }
           }
+
           + label {
             cursor: default;
             color: $gray-60;
@@ -418,6 +478,7 @@
       cursor: pointer;
     }
   }
+
   // Radio Style
   &__radio {
     @apply flex items-center;
@@ -455,10 +516,12 @@
           border-radius: 50%;
           background-color: $primary-1;
         }
+
         &:disabled {
           @extend %checked--disabled;
           border-color: $gray-20;
           background-color: transparent;
+
           &::before {
             background-color: $gray-20;
           }
@@ -472,11 +535,13 @@
         &.radio--readonly {
           border-color: $gray-20;
           cursor: default;
+
           &:checked {
             &:before {
               background-color: $gray-60;
             }
           }
+
           + label {
             cursor: default;
             color: $gray-60;
@@ -490,6 +555,7 @@
       cursor: pointer;
     }
   }
+
   // input Style
   &__input {
     flex: 1 1 0%;
@@ -508,25 +574,42 @@
       min-width: 200px;
       max-width: 300px;
     }
+
+    &--200 {
+      flex: inherit;
+      width: 40%;
+      max-width: 200px;
+    }
+
+    &--150 {
+      flex: inherit;
+      width: 100%;
+      min-width: 100px;
+      max-width: 150px;
+    }
     &--100 {
       flex: inherit;
       width: 100%;
       min-width: 50px;
       max-width: 100px;
     }
+
     &::placeholder {
       font-size: 13px;
       color: $gray-50;
     }
 
     @extend %form__state;
+
     &.form__error {
       border: 1px solid $validation;
+
       &:focus {
         border: 1px solid $validation;
       }
     }
   }
+
   // textarea Style
   &__textarea {
     flex: 1 1 0%;
@@ -536,6 +619,7 @@
     padding: 9px 11px;
     border: 1px solid $gray-20;
     resize: none;
+
     &::placeholder {
       font-size: 13px;
       color: $gray-50;
@@ -545,14 +629,17 @@
 
     &.form__error {
       border: 1px solid $validation;
+
       & + p {
         margin-top: 0px;
       }
+
       &:focus {
         border: 1px solid $validation;
       }
     }
   }
+
   &__file {
     &--btn {
       label {
@@ -571,6 +658,7 @@
         transition: all 0.2s ease-in-out;
         cursor: pointer;
       }
+
       input[type='file'] {
         position: absolute;
         top: 0;
@@ -584,14 +672,18 @@
         border: 0;
       }
     }
+
     &--img {
       width: 120px;
-      height: 68px;
+      height: 120px;
       background: $gray-10;
+      object-fit: scale-down;
     }
+
     &--update {
       line-height: 32px;
     }
+
     &--delete {
       width: 16px;
       height: 16px;
@@ -601,6 +693,7 @@
       vertical-align: middle;
     }
   }
+
   &__infotext {
     margin-top: 2px;
     color: $gray-50;
@@ -618,25 +711,30 @@ p.form__error {
 .v-select {
   width: auto;
   font-size: 13px;
+
   &.form__error {
     .vs__dropdown-toggle {
       border: 1px solid $validation;
+
       &:focus {
         border: 1px solid $validation;
       }
     }
   }
+
   .vs__search {
     margin: 0;
     padding: 0;
     color: $gray-50;
   }
+
   &.vs--open {
     // focus style
     .vs__dropdown-toggle {
       border-color: $primary-4;
     }
   }
+
   .vs__dropdown-toggle {
     height: 32px;
     padding: 0;
@@ -646,6 +744,7 @@ p.form__error {
     transition: 0.1s ease-out;
     box-sizing: border-box;
     cursor: pointer;
+
     &::placeholder {
       color: $gray-60;
     }
@@ -654,10 +753,12 @@ p.form__error {
       height: 32px; //select 높이만큼 수정
       padding-left: 11px;
       cursor: pointer;
+
       .vs__search {
         margin: 0;
         padding: 0;
       }
+
       .vs__selected {
         position: unset;
         margin: 0;
@@ -670,6 +771,7 @@ p.form__error {
     .vs__actions {
       position: relative;
       transform: scale(0.75);
+
       &::before {
         content: '';
         width: 13px;
@@ -688,6 +790,7 @@ p.form__error {
       }
     }
   }
+
   &.vs--open {
     .vs__actions {
       &::before {
@@ -700,6 +803,7 @@ p.form__error {
       }
     }
   }
+
   // 드롭다운
   .vs__dropdown-menu {
     overflow-y: auto;
@@ -714,6 +818,7 @@ p.form__error {
       padding: 2px 5px;
       background: $white;
       color: $gray-70;
+
       &:hover,
       &:focus {
         color: $gray-40;
@@ -729,6 +834,7 @@ p.form__error {
 
       .vs__selected-options {
         cursor: not-allowed;
+
         .vs__selected,
         .vs__search {
           margin: 0;
@@ -738,6 +844,7 @@ p.form__error {
           cursor: not-allowed;
         }
       }
+
       .vs__actions {
         display: none;
       }
@@ -750,8 +857,10 @@ p.form__error {
       background: $gray-1;
       border: 1px solid $gray-20;
       cursor: default;
+
       .vs__selected-options {
         cursor: default;
+
         .vs__selected,
         .vs__search {
           margin: 0;
@@ -766,15 +875,18 @@ p.form__error {
         display: none;
       }
     }
+
     .vs__dropdown-menu {
       display: none;
     }
   }
+
   & + .form__error {
     color: $validation;
     margin-top: 4px;
   }
 }
+
 /* ============= grid Style ============= */
 .grid {
   display: flex;
@@ -824,6 +936,7 @@ p.form__error {
 
     thead {
       background: $white;
+
       th {
         height: 35px;
         padding: 0 3px;
@@ -832,6 +945,7 @@ p.form__error {
         text-align: center;
         word-break: break-all;
         font-weight: 500;
+
         &:first-child {
           border-left: none;
         }
@@ -868,6 +982,7 @@ p.form__error {
           &.link-style {
             color: $primary-1;
           }
+
           &.link-style,
           &.cursor-pointer {
             cursor: pointer;
@@ -880,6 +995,7 @@ p.form__error {
             color: $gray-40;
             background: $primary-3;
             cursor: default;
+
             &.link-style {
               color: $primary-2;
             }
@@ -900,6 +1016,7 @@ p.form__error {
         }
       }
     }
+
     tfoot {
       tr {
         th,
@@ -910,18 +1027,23 @@ p.form__error {
     }
   }
 }
+
 /* ============= Search-form Style ============= */
 .search-form {
   @apply flex flex-wrap items-center;
   margin-bottom: 10px;
+
   > div,
   button {
     margin-bottom: 8px;
   }
+
   .mx-datepicker {
     width: 120px;
+
     .mx-input-wrapper {
       width: 100%;
+
       .mx-input {
         height: 30px;
         border-radius: 0;
@@ -936,28 +1058,35 @@ p.form__error {
     letter-spacing: -0.3px;
     color: $gray-70;
   }
+
   .client {
     .form__input {
       @apply truncate;
       min-width: 155px;
+
       &:disabled {
         cursor: default;
       }
     }
   }
+
   button {
     margin-left: 6px;
   }
+
   .btn__primary-line {
     height: 30px;
     padding: 0 15px;
   }
+
   .form__input {
     height: 30px;
     min-width: 300px;
   }
+
   .vs__dropdown-toggle {
     height: 30px;
+
     .vs__selected-options {
       height: 30px;
     }
@@ -967,24 +1096,30 @@ p.form__error {
 .form__box {
   .mx-datepicker {
     width: 208px;
+
     .mx-input-wrapper {
       width: 100%;
+
       .mx-input {
         height: 30px;
         border-radius: 0;
+
         &:focus,
         &:hover {
           border-color: $primary-4;
         }
       }
     }
+
     &.mx-datepicker--readonly {
       .mx-input-wrapper {
         pointer-events: none;
+
         .mx-input {
           background: $gray-1;
           border: 1px solid $gray-20;
         }
+
         .mx-icon-calendar {
           display: none;
         }
